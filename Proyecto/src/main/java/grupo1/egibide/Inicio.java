@@ -7,26 +7,15 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class Inicio {
-    private JPanel login;
-    private JLabel titulo;
-    private JButton administrador;
-    private JButton duenyo;
-    private JButton usuario;
+    private JPanel panel;
+    private JTextField usuario;
+    private JTextField contraseña;
+    private JButton enviar;
 
-    public Inicio() { //Al pulsar en los iconos del menú
-        administrador.addActionListener(new ActionListener() { //ir a pantalla de admin
+    public Inicio() {
+        enviar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-        duenyo.addActionListener(new ActionListener() { //ir a pantalla dueño
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-        usuario.addActionListener(new ActionListener() { //ir a pantalla usuario
-            public void actionPerformed(ActionEvent e) {
-
+                //Al pulsar enviar...
             }
         });
     }
@@ -35,7 +24,7 @@ public class Inicio {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         JFrame frame = new JFrame("Inicio");
-        frame.setContentPane(new Inicio().login);
+        frame.setContentPane(new Inicio().panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
