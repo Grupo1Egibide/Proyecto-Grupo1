@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Inicio {
     private JPanel login;
@@ -13,14 +15,19 @@ public class Inicio {
     private JButton duenyo;
     private JButton usuario;
 
+    // LISTA DE DUEÑOS
+    private final List<Duenyo> duenyos = new ArrayList<>();
+
     public Inicio() { //Al pulsar en los iconos del menú
         administrador.addActionListener(new ActionListener() { //ir a pantalla de admin
             public void actionPerformed(ActionEvent e) {
 
             }
         });
-        duenyo.addActionListener(new ActionListener() { //ir a pantalla dueño
+        duenyo.addActionListener(new ActionListener() {
+            // IR A LA PANTALLA DUEÑO
             public void actionPerformed(ActionEvent e) {
+                PantallaDuenyo1 ventanaDuenyo = new PantallaDuenyo1(duenyos);
 
             }
         });
