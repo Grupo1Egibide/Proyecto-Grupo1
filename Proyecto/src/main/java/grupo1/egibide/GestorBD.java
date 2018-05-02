@@ -33,4 +33,15 @@ public class GestorBD {
         return conexion;
     }
 
+    public static void desconectar(){
+        if(conexion!=null){
+            try{
+                conexion.close();
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
+    }
+
+
 }

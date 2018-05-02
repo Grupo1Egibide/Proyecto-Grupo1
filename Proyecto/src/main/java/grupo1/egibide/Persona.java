@@ -11,11 +11,11 @@ public class Persona {
     private String fechaNac;
     private int edad;
     private String poblacion;
-
+/*
     Connection conexion=GestorBD.conectar();
 
     Statement st = conexion.createStatement();
     String sql= "SELECT * FROM JUGADOR";
     ResultSet rs=st.executeQuery(sql);
-
+*/
 }
