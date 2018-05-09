@@ -34,4 +34,15 @@ public class Cuenta {
         this.contrasenya = contrasenya;
         this.tipoCuenta = tipoCuenta;
     }
+
+    @Override
+    public String toString() {
+        return "Cuenta{" +
+                "nombre='" + nombre + '\'' +
+                ", contrasenya='" + contrasenya + '\'' +
+                ", tipoCuenta=" + tipoCuenta +
+                '}';
+    }
+
+
 }

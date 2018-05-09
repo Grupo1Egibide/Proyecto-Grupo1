@@ -12,7 +12,7 @@ public class GestorBD {
         try{
             if (conexion==null || conexion.isClosed()){
                 //Driver
-                Class.forName("com.mysql.jdbc.Driver");
+                Class.forName("com.mysql.cj.jdbc.Driver");
 
                 //Cadena de conexión
                 String servidor ="192.168.33.10";
@@ -20,7 +20,8 @@ public class GestorBD {
                 String bd="mydb"; //cambiar por liga
                 String login="root";
                 String password="root";
-                String url = "jdbc:mysql://" + servidor + ":" + puerto + "/" + bd;
+                String opciones = "?verifyServerCertificate=false&useSSL=true&requireSSL=false";
+                String url = "jdbc:mysql://" + servidor + ":" + puerto + "/" + bd + opciones;
 
                 //Establecer conexion
                 conexion = DriverManager.getConnection(url,login,password);
@@ -34,7 +35,7 @@ public class GestorBD {
     }
 
     public static void desconectar(){
-        if(conexion!=null){
+        if(conexion!= null) {
             try{
                 conexion.close();
             }catch (SQLException e){
