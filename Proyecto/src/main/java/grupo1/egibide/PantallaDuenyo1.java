@@ -26,7 +26,8 @@ public class PantallaDuenyo1 {
     private List<Equipo> listaEquipos = EquipoBD.equipos();
 
 
-    public PantallaDuenyo1(List<Duenyo> duenyos) {
+
+    public PantallaDuenyo1() {
         // VISUALIZAR LA VENTANA
         JFrame frame = new JFrame("PantallaDuenyo1");
         frame.setContentPane(panelMenuDuenyo);

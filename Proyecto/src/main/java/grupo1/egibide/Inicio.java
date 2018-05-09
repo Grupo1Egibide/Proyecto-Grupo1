@@ -61,7 +61,19 @@ public class Inicio {
                     //Porqué ha parado?
                     if (t < cuentas.size() && y < cuentas.size()) { //todo OK
                         mensaje.setText("TODO OK");
+
+
                         //SACAR PANTALLA SEGÚN USUARIO
+                            //USUARIO 1 ADMIN, 2 DUEÑO, 3 USUARIO
+                        if (cuentas.get(y).getTipoCuenta()==1){ //ES ADMIN
+                            //sacamos menú de admin
+
+                            PantallaAdmin ventanaAdmin=new PantallaAdmin();
+                        }
+                        else if(cuentas.get(y).getTipoCuenta()==2){ //ES DUEÑO
+                            PantallaDuenyo1 ventanaDuenyo=new PantallaDuenyo1();
+                        }
+                        
 
 
                     } else {
