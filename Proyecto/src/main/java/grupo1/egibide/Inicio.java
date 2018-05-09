@@ -37,13 +37,10 @@ public class Inicio {
                         y++;
                     }
                     //Porqué ha parado?
-                    if (y < cuentas.size()) {
+                    /*if (y < cuentas.size()) {
                       mensaje.setText("Nombre de usuario CORRECTO");
-                    } else {
-                        mensaje.setText("Nombre de usuario INCORRECTO");
-                    }
-                    /*if (contraseña.getText().equalsIgnoreCase("")) {
-                        System.out.println("Introduce contraseña");
+                    }else{
+                        mensaje.setText("Error");
                     }*/
 
                     //Comprobamos que la contraseña es OK para ese USUARIO
@@ -53,10 +50,13 @@ public class Inicio {
                         t++;
                     }
                     //Porqué ha parado?
-                    if (t < cuentas.size()) {
-                        mensaje.setText("Contraseña CORRECTA");
-                    } else {
-                        mensaje.setText("Contraseña INCORRECTA");
+                    if (t < cuentas.size() && y<cuentas.size()) { //todo OK
+                        mensaje.setText("TODO OK");
+                        //SACAR PANTALLA SEGÚN USUARIO
+                        
+
+                    } else{
+                        mensaje.setText("Error");
                     }
 
                 }
