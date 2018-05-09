@@ -10,11 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-<<<<<<< HEAD
-      <module name="Grupo1" target="7" />
-=======
       <module name="Grupo1" target="1.8" />
->>>>>>> master-proyecto
     </bytecodeTargetLevel>
   </component>
 </project>
