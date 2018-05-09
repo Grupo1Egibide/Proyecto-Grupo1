@@ -1,5 +1,9 @@
 package grupo1.egibide;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 public class Persona {
 
     private String dni;
@@ -7,6 +11,8 @@ public class Persona {
     private String fechaNac;
     private int edad;
     private String poblacion;
+/*
+    Connection conexion=GestorBD.conectar();
 
     // CONSTRUCTORES
     public Persona(String dni, String nombre, String fechaNac, int edad, String poblacion) {
