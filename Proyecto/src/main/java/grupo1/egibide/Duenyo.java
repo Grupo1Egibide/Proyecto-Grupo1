@@ -1,6 +1,6 @@
 package grupo1.egibide;
 
-public class Duenyo extends Persona {
+public class Duenyo {
     private int codDuenyo;
     private int salario;
 
