@@ -11,7 +11,8 @@ public class Persona {
     private String fechaNac;
     private int edad;
     private String poblacion;
-/*
+
+
     Connection conexion=GestorBD.conectar();
 
     // CONSTRUCTORES

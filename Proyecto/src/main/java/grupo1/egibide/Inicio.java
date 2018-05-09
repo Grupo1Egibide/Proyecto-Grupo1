@@ -21,18 +21,19 @@ public class Inicio {
     // LISTA DE DUEÑOS
     private final List<Duenyo> duenyos = new ArrayList<>();
 
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Inicio");
+        frame.setContentPane(new Inicio().panel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
     public Inicio() { //Al pulsar en los iconos del menú
-        administrador.addActionListener(new ActionListener() { //ir a pantalla de admin
-            public void actionPerformed(ActionEvent e) {
-    public Inicio() {
+
         Connection conexion = GestorBD.conectar();
 
-            }
-        });
-        duenyo.addActionListener(new ActionListener() {
-            // IR A LA PANTALLA DUEÑO
-            public void actionPerformed(ActionEvent e) {
-                PantallaDuenyo1 ventanaDuenyo = new PantallaDuenyo1(duenyos);
+
         List<Cuenta> cuentas = CuentaBD.cuentas();
 
         enviar.addActionListener(new ActionListener() {
@@ -40,22 +41,16 @@ public class Inicio {
                 //Al pulsar enviar...
 
                 //NO nos ha metido datos
-                if(usuario.getText().equalsIgnoreCase("") && contraseña.getText().equalsIgnoreCase("")){
+                if (usuario.getText().equalsIgnoreCase("") && contraseña.getText().equalsIgnoreCase("")) {
                     mensaje.setText("Introduce datos");
-                }
-                else {
+                } else {
                     int y = 0;
                     // usuario.getText();
                     //COMPROBAMOS QUE EL NOMBRE DE USUARIO ES CORRECTO (EXISTE)
                     while (y < cuentas.size() && !usuario.getText().equalsIgnoreCase(cuentas.get(y).getNombre())) {
                         y++;
                     }
-                    //Porqué ha parado?
-                    /*if (y < cuentas.size()) {
-                      mensaje.setText("Nombre de usuario CORRECTO");
-                    }else{
-                        mensaje.setText("Error");
-                    }*/
+
 
                     //Comprobamos que la contraseña es OK para ese USUARIO
                     int t = 0;
@@ -64,12 +59,12 @@ public class Inicio {
                         t++;
                     }
                     //Porqué ha parado?
-                    if (t < cuentas.size() && y<cuentas.size()) { //todo OK
+                    if (t < cuentas.size() && y < cuentas.size()) { //todo OK
                         mensaje.setText("TODO OK");
                         //SACAR PANTALLA SEGÚN USUARIO
-                        
 
-                    } else{
+
+                    } else {
                         mensaje.setText("Error");
                     }
 
@@ -79,7 +74,7 @@ public class Inicio {
         });
     }
 
-    public static void main(String[] args) {
+            /*public static void main(String[] args) {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         JFrame frame = new JFrame("Inicio");
@@ -101,9 +96,10 @@ public class Inicio {
         List<Duenyo> listaDuenyo = DuenyoBD.duenyos();
         System.out.println(listaDuenyo);
         */
-    }
+
 
     private void createUIComponents() {
-        // TODO: place custom component creation code here
+        //
     }
+
 }
