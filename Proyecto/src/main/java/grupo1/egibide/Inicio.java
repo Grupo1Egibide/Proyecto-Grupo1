@@ -64,17 +64,16 @@ public class Inicio {
 
 
                         //SACAR PANTALLA SEGÚN USUARIO
-                            //USUARIO 1 ADMIN, 2 DUEÑO, 3 USUARIO
-                        if (cuentas.get(y).getTipoCuenta()==1){ //ES ADMIN
+                        //USUARIO 1 ADMIN, 2 DUEÑO, 3 USUARIO
+                        if (cuentas.get(y).getTipoCuenta() == 1) { //ES ADMIN
                             //sacamos menú de admin
 
-                            PantallaAdmin ventanaAdmin=new PantallaAdmin();
+                            PantallaAdmin ventanaAdmin = new PantallaAdmin();
+                        } else if (cuentas.get(y).getTipoCuenta() == 2) { //ES DUEÑO
+                            PantallaDuenyo1 ventanaDuenyo = new PantallaDuenyo1();
+                        } else if (cuentas.get(y).getTipoCuenta() == 3) {//ES USUARIO
+                            
                         }
-                        else if(cuentas.get(y).getTipoCuenta()==2){ //ES DUEÑO
-                            PantallaDuenyo1 ventanaDuenyo=new PantallaDuenyo1();
-                        }
-                        
-
 
                     } else {
                         mensaje.setText("Error");
