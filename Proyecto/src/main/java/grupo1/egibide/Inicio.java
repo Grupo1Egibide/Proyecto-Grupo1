@@ -70,7 +70,7 @@ public class Inicio {
                             PantallaAdmin ventanaAdmin = new PantallaAdmin();
 
                         } else if (cuentas.get(y).getTipoCuenta() == 2) { //ES DUEÑO
-                            PantallaDuenyo1 ventanaDuenyo = new PantallaDuenyo1();
+                            PantallaDuenyo1 ventanaDuenyo = new PantallaDuenyo1(cuentas);
 
                         } else if (cuentas.get(y).getTipoCuenta() == 3) {//ES USUARIO
                             PantallaUsuario ventanaUsuario = new PantallaUsuario(cuentas);
