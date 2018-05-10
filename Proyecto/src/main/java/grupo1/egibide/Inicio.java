@@ -18,9 +18,11 @@ public class Inicio {
     private JButton enviar;
     private JLabel mensaje;
 
-    // LISTA DE DUEÑOS
-    private final List<Duenyo> duenyos = new ArrayList<>();
+    // LISTA DE CUENTAS
+    List<Cuenta> cuentas = CuentaBD.cuentas();
 
+
+    // PARA VISUALIZAR EL LOGIN
     public static void main(String[] args) {
         JFrame frame = new JFrame("Inicio");
         frame.setContentPane(new Inicio().panel);
@@ -29,12 +31,10 @@ public class Inicio {
         frame.setVisible(true);
     }
 
+
     public Inicio() { //Al pulsar en los iconos del menú
 
         Connection conexion = GestorBD.conectar();
-
-
-        List<Cuenta> cuentas = CuentaBD.cuentas();
 
         enviar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -67,11 +67,14 @@ public class Inicio {
                         //USUARIO 1 ADMIN, 2 DUEÑO, 3 USUARIO
                         if (cuentas.get(y).getTipoCuenta() == 1) { //ES ADMIN
                             //sacamos menú de admin
-
                             PantallaAdmin ventanaAdmin = new PantallaAdmin();
+
                         } else if (cuentas.get(y).getTipoCuenta() == 2) { //ES DUEÑO
-                            PantallaDuenyo1 ventanaDuenyo = new PantallaDuenyo1();
+                            PantallaDuenyo1 ventanaDuenyo = new PantallaDuenyo1(cuentas);
+
                         } else if (cuentas.get(y).getTipoCuenta() == 3) {//ES USUARIO
+                            PantallaUsuario ventanaUsuario = new PantallaUsuario(cuentas);
+
                             
                         }
 
@@ -85,14 +88,6 @@ public class Inicio {
         });
     }
 
-            /*public static void main(String[] args) {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        JFrame frame = new JFrame("Inicio");
-        frame.setContentPane(new Inicio().panel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
 
         /*
         // PRUEBA: VER LOS JUGADORES DE LA BD
@@ -107,10 +102,5 @@ public class Inicio {
         List<Duenyo> listaDuenyo = DuenyoBD.duenyos();
         System.out.println(listaDuenyo);
         */
-
-
-    private void createUIComponents() {
-        //
-    }
 
 }
