@@ -44,8 +44,11 @@ public class PantallaDuenyo1 {
         });
 
         // COMBOBOX EQUIPO: RELLENARLO DE LOS EQUIPOS DEL DUEÑO
-        for (int i = 0; i < listaEquipos.size(); i++) {
-            comboBoxEquipo.addItem(listaEquipos.get(i).getNombre());
+        for (int i = 0; i < listaDuenyo.size(); i++) {
+            for (int j = 0; j < listaEquipos.size(); j++) {
+
+
+            }
 
         }
 
