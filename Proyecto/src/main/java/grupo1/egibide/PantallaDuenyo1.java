@@ -27,7 +27,7 @@ public class PantallaDuenyo1 {
 
 
 
-    public PantallaDuenyo1() {
+    public PantallaDuenyo1(List<Cuenta> cuentas) {
         // VISUALIZAR LA VENTANA
         JFrame frame = new JFrame("PantallaDuenyo1");
         frame.setContentPane(panelMenuDuenyo);
@@ -39,13 +39,21 @@ public class PantallaDuenyo1 {
         botonEquipos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PantallaConfeccionar ventanita = new PantallaConfeccionar(listaJugador);
+                PantallaConfeccionar ventanaConfeccionar = new PantallaConfeccionar(listaJugador);
             }
         });
 
         // COMBOBOX EQUIPO: RELLENARLO DE LOS EQUIPOS DEL DUEÑO
-        for (int i = 0; i < listaEquipos.size(); i++) {
-            comboBoxEquipo.addItem(listaEquipos.get(i).getNombre());
+        for (int i = 0; i < cuentas.size(); i++) {
+            for (int j = 0; j < listaDuenyo.size(); j++) {
+                if (listaDuenyo.get(j).getNombre() == cuentas.get(i).getNombre()){
+                    for (int k = 0; k < listaEquipos.size(); k++) {
+                        comboBoxEquipo.addItem(listaEquipos.get(k).getNombre());
+
+                    }
+                }
+
+            }
 
         }
 
