@@ -67,7 +67,7 @@ public class Inicio {
                         //USUARIO 1 ADMIN, 2 DUEÑO, 3 USUARIO
                         if (cuentas.get(y).getTipoCuenta() == 1) { //ES ADMIN
                             //sacamos menú de admin
-                            PantallaAdmin ventanaAdmin = new PantallaAdmin();
+                            PantallaAdmin1 ventanaAdmin = new PantallaAdmin1();
 
                         } else if (cuentas.get(y).getTipoCuenta() == 2) { //ES DUEÑO
                             PantallaDuenyo1 ventanaDuenyo = new PantallaDuenyo1(cuentas);

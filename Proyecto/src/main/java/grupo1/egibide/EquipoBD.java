@@ -41,7 +41,32 @@ public class EquipoBD {
         GestorBD.desconectar();
 
         return listaEquipos;
+
+
     }
 
+    public boolean buscarEquipo(int codEquipo) {
+        Connection conexion = GestorBD.conectar();
+        boolean estado=true;
+
+        try {
+
+            Statement st = conexion.createStatement();
+            String sql = "select * from Equipo where codEquipo=" + codEquipo;
+            ResultSet rs = st.executeQuery(sql);
+
+            if(rs.next()){
+                estado=true;
+            }
+            else{
+                estado= false;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return estado;
+
+    }
 }
 

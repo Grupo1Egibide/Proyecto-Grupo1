@@ -19,6 +19,10 @@ public class Jugador extends Persona {
         this.equipo = equipo;
     }
 
+    public Jugador(String nombre) {
+        super(nombre);
+    }
+
     public Jugador(int codJugador, String nombre, String nick, int salario, String fechaAlta, String posicion, int equipo_codEquipo) {
         super(nombre);
         this.codJugador = codJugador;
@@ -88,7 +92,7 @@ public class Jugador extends Persona {
 
     // ASOCIACIONES
     private Equipo equipo;
-
+    private VerJugador verjugador1;
     public Equipo getEquipo() {
         return equipo;
     }
