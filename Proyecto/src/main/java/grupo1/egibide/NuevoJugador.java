@@ -9,7 +9,6 @@ import java.util.List;
 public class NuevoJugador {
     private JPanel panel8;
     private JTextField nombre;
-    private JTextField codJugador;
     private JTextField nick;
     private JTextField salario;
     private JTextField fechaAlta;
@@ -22,43 +21,64 @@ public class NuevoJugador {
     private JTextField posicion;
     private JLabel error;
 
+    //asociación
+    private List<Jugador> jugadores = JugadorBD.jugadores();
+    private List<Equipo> equipos = EquipoBD.equipos();
+    private List<Jugador> jugadores1 = new ArrayList<>();
 
     public NuevoJugador() {
         JFrame frame = new JFrame("NuevoJugador");
         frame.setContentPane(panel8);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-
+        //System.out.println(JugadorBD.buscarJugador("silvia"));
         crearButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) { //Al pulsar crear
                 //convertimos los datos que no son STRING a INT
                 int edad1 = Integer.parseInt(edad.getText());
-                int codJugador1 = Integer.parseInt(codJugador.getText());
+                //int codJugador1 = Integer.parseInt(codJugador.getText());
                 int salario1 = Integer.parseInt(salario.getText());
                 int codEquipo1 = Integer.parseInt(codEquipo.getText());
                 Equipo equipoEncontrado;
                 //Buscamos el equipo
-                List<Equipo> prueba = new ArrayList<>();
+                //List<Equipo> prueba = new ArrayList<>();
+                //private List<Equipo> prueba;
+
+
                 int i = 0;
-                while (i < prueba.size() && prueba.get(i).getCodEquipo() != codEquipo1) {
+
+                while (i < equipos.size() && equipos.get(i).getCodEquipo() != codEquipo1) {
                     i++;
                 }
-                if (i < prueba.size()) {
+                if (i < equipos.size()) {
                     //encontrado
-                    equipoEncontrado = prueba.get(i);
+                    equipoEncontrado = equipos.get(i);
                 } else {
                     equipoEncontrado = null;
                 }
+
+
+
+                //Creamos el objeto tipo Jugador con los datos
                 Jugador crearJugador = new Jugador(dni.getText(), nombre.getText(), fechaNacimieto.getText(), edad1,
-                        poblacion.getText(), codJugador1, nick.getText(), salario1, fechaAlta.getText(),
+                        poblacion.getText(), nick.getText(), salario1, fechaAlta.getText(),
                         posicion.getText(), equipoEncontrado);
+                //Lo guardamos en la BBDD
+                JugadorBD.guardar(crearJugador);
+
+                //Actualizamos la clase con la BBDD
+                jugadores = JugadorBD.jugadores();
+                while (i < jugadores.size()) {
+                    System.out.println(jugadores.get(i).getNick());
+                    i++;
+                }
+
+
             }
         });
     }
 
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
-    }
+
 }

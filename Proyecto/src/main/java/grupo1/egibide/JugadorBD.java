@@ -50,6 +50,41 @@ public class JugadorBD {
 
 
     }
+//BUSCAR UN JUGADOR DETERMINADO
+public static Jugador buscarJugador(int codigo) {
+
+    Jugador JUGADOR = null;
+
+    Connection conexion = GestorBD.conectar();
+
+    try {
+
+        Statement st = conexion.createStatement();
+        String sql = "SELECT * FROM Jugador where codJugador =" + codigo;
+        ResultSet rs = st.executeQuery(sql);
+
+        if (rs.next()) {
+
+            JUGADOR = new Jugador(
+                    rs.getInt("Codigo Jugador"),
+                    rs.getString("Nombre"),
+                    rs.getString("Nick"),
+                    rs.getInt("Salario"),
+                    rs.getString("Fecha alta"),
+                    rs.getString("Posicion"),
+                    rs.getInt("Codigo equipo")
+            );
+        }
+
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+
+    GestorBD.desconectar();
+
+    return JUGADOR;
+}
+    //Guardamos un nuevo jugador
     public static void guardar(Jugador jugador) {
 
         Connection conexion = GestorBD.conectar();
@@ -59,21 +94,38 @@ public class JugadorBD {
             String sql;
             java.sql.PreparedStatement st;
 
-                sql = "INSERT INTO Jugador VALUES (?,?,?,?,?,?)";
+            if(jugador.getCodJugador()==-1) {
+                sql = "INSERT INTO Jugador (`nombre`, `nick`, `salario`, `fechaAlta`, `Equipo_codEquipo`,`posicion`) " +
+                        "VALUES (?,?,?,?,?,?)";
                 st = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-                st.setInt(1, jugador.getCodJugador());
-                st.setString(2, pelicula.getTitulo());
-                st.setDouble(3, pelicula.getPuntuacion());
-                st.setInt(4, pelicula.getAnyo());
+                //st.setString(1, jugador.getDni());
+                st.setString(1, jugador.getNombre());
+                //  st.setString(3, jugador.getFechaNac());
+                // st.setInt(4, jugador.getEdad());
+                //  st.setString(5, jugador.getPoblacion());
+                st.setString(2, jugador.getNick());
+                st.setInt(3, jugador.getSalario());
+                st.setString(4, jugador.getFechaAlta());
+                st.setInt(5, jugador.getEquipo().getCodEquipo());
+                st.setString(6, jugador.getPosicion());
+            }else{
+                sql = "UPDATE Jugador SET nombre=?, nick=?, salario=?, fechaAlta=?, Equipo_codEquipo=?, posicion=?) ";
+                st = conexion.prepareStatement(sql);
 
+                st.setString(1, jugador.getNombre());
+                st.setString(2, jugador.getNick());
+                st.setInt(3, jugador.getSalario());
+                st.setString(4, jugador.getFechaAlta());
+                st.setInt(5, jugador.getEquipo().getCodEquipo());
+                st.setString(6, jugador.getPosicion());
 
-
+            }
             int filasAfectadas = st.executeUpdate();
-            if (pelicula.getId() == -1 && filasAfectadas > 0) {
+            if (jugador.getCodJugador() == -1 && filasAfectadas > 0) {
                 ResultSet rs = st.getGeneratedKeys();
                 while (rs.next()) {
-                    pelicula.setId(rs.getInt(1));
+                    jugador.setCodJugador(rs.getInt(1));
                 }
             }
 

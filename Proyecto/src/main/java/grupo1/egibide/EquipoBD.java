@@ -28,8 +28,7 @@ public class EquipoBD {
                 listaEquipos.add(
                         new Equipo(
                                 rs.getInt("codEquipo"),
-                                rs.getString("nombre"),
-                                rs.getInt("anyoFundacion")
+                                rs.getString("nombre")
                         )
                 );
             }

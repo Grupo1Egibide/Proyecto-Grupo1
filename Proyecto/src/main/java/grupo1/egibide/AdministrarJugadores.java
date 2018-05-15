@@ -17,7 +17,7 @@ public class AdministrarJugadores {
     public AdministrarJugadores() {
         JFrame frame = new JFrame("AdministrarJugadores");
         frame.setContentPane(panel3);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
         creaJugadorButton.addActionListener(new ActionListener() {
@@ -25,6 +25,12 @@ public class AdministrarJugadores {
             public void actionPerformed(ActionEvent e) {
                 NuevoJugador pantallaCrearJugador=new NuevoJugador();
 
+            }
+        });
+        verJugadoresButton.addActionListener(new ActionListener() { //ver jugadores
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                VerJugador verjugadores=new VerJugador();
             }
         });
     }

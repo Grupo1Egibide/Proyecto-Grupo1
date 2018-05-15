@@ -39,6 +39,7 @@ public class Inicio {
         enviar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //Al pulsar enviar...
+            //DEPURAR
 
                 //NO nos ha metido datos
                 if (usuario.getText().equalsIgnoreCase("") && contraseña.getText().equalsIgnoreCase("")) {

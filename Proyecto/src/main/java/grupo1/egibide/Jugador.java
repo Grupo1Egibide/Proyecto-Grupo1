@@ -6,12 +6,23 @@ public class Jugador extends Persona {
     private int salario;
     private String fechaAlta;
     private String posicion;
+    private String nombre;
 
 
     // CONSTRUCTORES
     public Jugador(String dni, String nombre, String fechaNac, int edad, String poblacion, int codJugador, String nick, int salario, String fechaAlta, String posicion, Equipo equipo) {
         super(dni, nombre, fechaNac, edad, poblacion);
         this.codJugador = codJugador;
+        this.nick = nick;
+        this.salario = salario;
+        this.fechaAlta = fechaAlta;
+        this.posicion = posicion;
+        this.equipo = equipo;
+    }
+
+    public Jugador(String dni, String nombre, String fechaNac, int edad, String poblacion, String nick, int salario, String fechaAlta, String posicion, Equipo equipo) {
+        super(dni, nombre, fechaNac, edad, poblacion);
+        this.codJugador=-1; //el jugador no existe
         this.nick = nick;
         this.salario = salario;
         this.fechaAlta = fechaAlta;
