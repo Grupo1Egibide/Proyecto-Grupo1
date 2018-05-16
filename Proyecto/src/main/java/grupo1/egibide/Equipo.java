@@ -9,6 +9,14 @@ public class Equipo {
     private int anyoFundacion;
 
     // CONSTRUCTORES
+    public Equipo(int codEquipo, String nombre, int anyoFundacion, int duenyo) {
+        this.codEquipo = codEquipo;
+        this.nombre = nombre;
+        this.anyoFundacion = anyoFundacion;
+        this.duenyo = duenyo;
+    }
+
+   /*
     public Equipo(int codEquipo, String nombre, int anyoFundacion, Duenyo duenyo, List<Jugador> jugadores, Partido partido) {
         this.codEquipo = codEquipo;
         this.nombre = nombre;
@@ -17,6 +25,7 @@ public class Equipo {
         this.jugadores = jugadores;
         this.partido = partido;
     }
+
 
     public Equipo(String nombre, int anyoFundacion, Duenyo duenyo, List<Jugador> jugadores, Partido partido) {
         this.codEquipo = -1;
@@ -32,6 +41,8 @@ public class Equipo {
         this.nombre = nombre;
         this.anyoFundacion = anyoFundacion;
     }
+
+*/
 
     // GETTERS Y SETTERS
     public int getCodEquipo() {
@@ -58,6 +69,7 @@ public class Equipo {
         this.anyoFundacion = anyoFundacion;
     }
 
+    /*
     public Duenyo getDuenyo() {
         return duenyo;
     }
@@ -65,7 +77,7 @@ public class Equipo {
     public void setDuenyo(Duenyo duenyo) {
         this.duenyo = duenyo;
     }
-
+*/
     public List<Jugador> getJugadores() {
         return jugadores;
     }
@@ -90,15 +102,15 @@ public class Equipo {
                 ", nombre='" + nombre + '\'' +
                 ", anyoFundacion=" + anyoFundacion +
                 ", duenyo=" + duenyo +
-                ", jugadores=" + jugadores +
-                ", partido=" + partido +
                 '}';
     }
 
+
     // ASOCIACIONES
-    private Duenyo duenyo;
+    private int duenyo;
     private List<Jugador> jugadores;
     private Partido partido;
+
 
     private List<Jugador> listaJugadores = new ArrayList<>();
     private List<Duenyo> listaDuenyos = new ArrayList<>();

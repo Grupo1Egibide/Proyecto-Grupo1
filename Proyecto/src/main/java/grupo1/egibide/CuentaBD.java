@@ -9,6 +9,7 @@ import java.util.List;
 
 public class CuentaBD {
 
+    // Lista de todas las cuentas
     public static List<Cuenta> cuentas() {
         Inicio inicio;
         List<Cuenta> lista = new ArrayList<>();

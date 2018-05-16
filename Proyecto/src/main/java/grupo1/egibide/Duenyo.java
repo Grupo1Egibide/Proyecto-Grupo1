@@ -5,31 +5,19 @@ import java.util.List;
 public class Duenyo extends Persona {
     private int codDuenyo;
     private String nombre;
-   // private int salario;
 
-        /*
-    public Duenyo(String dni, String nombre, String fechaNac, int edad, String poblacion, int codDuenyo, int salario, Equipo equipo) {
+    public Duenyo(int codDuenyo, String nombre) {
+        this.codDuenyo = codDuenyo;
+        this.nombre = nombre;
+    }
+
+    /*
+    public Duenyo(String dni, String nombre, String fechaNac, int edad, String poblacion, int codDuenyo, String nombre1, Cuenta cuenta) {
         super(dni, nombre, fechaNac, edad, poblacion);
         this.codDuenyo = codDuenyo;
-        //this.salario = salario;
-        this.equipo = equipo;
+        this.nombre = nombre1;
+        this.cuenta = cuenta;
     }
-
-    public Duenyo(int edad, String poblacion) {
-        super(dni, nombre, fechaNac, edad, poblacion);
-        this.codDuenyo = -1;
-        //this.salario = salario;
-        this.equipo = equipo;
-    }
-
-    public int getSalario() {
-        return salario;
-    }
-
-    public void setSalario(int salario) {
-        this.salario = salario;
-    }
-    */
 
         // CONSTRUCTORES
     public Duenyo(String nombre, int codDuenyo, String nombre1) {
@@ -37,6 +25,8 @@ public class Duenyo extends Persona {
         this.codDuenyo = codDuenyo;
         this.nombre = nombre1;
     }
+
+   */
 
 
     // GETTERS Y SETTERS
@@ -62,18 +52,27 @@ public class Duenyo extends Persona {
         return equipos;
     }
 
+    public Cuenta getCuenta() {
+        return cuenta;
+    }
+
+    public void setCuenta(Cuenta cuenta) {
+        this.cuenta = cuenta;
+    }
+
     // toString
     @Override
     public String toString() {
         return "Duenyo{" +
                 "codDuenyo=" + codDuenyo +
                 ", nombre='" + nombre + '\'' +
+                ", cuenta=" + cuenta +
                 ", equipos=" + equipos +
                 '}';
     }
 
-
     // ASOCIACIONES
+    private Cuenta cuenta;
     private List<Equipo> equipos;
 
 

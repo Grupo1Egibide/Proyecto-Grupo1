@@ -2,32 +2,20 @@ package grupo1.egibide;
 
 public class Jugador extends Persona {
     private int codJugador;
+    private String nombre;
     private String nick;
     private int salario;
     private String fechaAlta;
     private String posicion;
 
-
     // CONSTRUCTORES
-    public Jugador(String dni, String nombre, String fechaNac, int edad, String poblacion, int codJugador, String nick, int salario, String fechaAlta, String posicion, Equipo equipo) {
-        super(dni, nombre, fechaNac, edad, poblacion);
+    public Jugador(int codJugador, String nombre, String nick, int salario, String fechaAlta, String posicion) {
         this.codJugador = codJugador;
+        this.nombre = nombre;
         this.nick = nick;
         this.salario = salario;
         this.fechaAlta = fechaAlta;
         this.posicion = posicion;
-        this.equipo = equipo;
-    }
-
-    public Jugador(int codJugador, String nombre, String nick, int salario, String fechaAlta, String posicion, int equipo_codEquipo) {
-        super(nombre);
-        this.codJugador = codJugador;
-        this.nick = nick;
-        this.salario = salario;
-        this.fechaAlta = fechaAlta;
-        this.posicion = posicion;
-        this.equipo = equipo;
-
     }
 
     // GETTERS Y SETTERS
@@ -71,19 +59,20 @@ public class Jugador extends Persona {
         this.posicion = posicion;
     }
 
+    @Override
+    public String getNombre() {
+        return nombre;
+    }
 
+    @Override
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-    // toString
+    // toString (PONGO SOLO EL NOMBRE, PARA QUE EN LAS JLIST APAREZCA SOLO EL NOMBRE)
     @Override
     public String toString() {
-        return "Jugador{" +
-                "codJugador=" + codJugador +
-                ", nick='" + nick + '\'' +
-                ", salario=" + salario +
-                ", fechaAlta='" + fechaAlta + '\'' +
-                ", posicion='" + posicion + '\'' +
-                ", equipo=" + equipo +
-                '}';
+        return nombre;
     }
 
     // ASOCIACIONES

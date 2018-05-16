@@ -9,10 +9,9 @@ import java.util.List;
 
 public class DuenyoBD {
 
-    public static List<Duenyo> duenyos() {
-
-        // Lista para dejar los objetos
-        List<Duenyo> listaDuenyos = new ArrayList<>();
+    // Para saber el código del dueño
+    public static Duenyo duenyo(String nombre) {
+        Duenyo duenyo = null;
 
         // Conexión a la BD
         Connection conexion = GestorBD.conectar();
@@ -20,18 +19,15 @@ public class DuenyoBD {
         try {
 
             Statement st = conexion.createStatement();
-            String sql = "SELECT * FROM Dueño";
+            String sql = "SELECT * FROM Dueño where Cuenta_nombre = '" + nombre +"'";
             ResultSet rs = st.executeQuery(sql);
 
-            while (rs.next()) {
+            if (rs.next()) {
 
-                listaDuenyos.add(
-                        new Duenyo(
-                                rs.getString("nombre"),
+                duenyo = new Duenyo(
                                 rs.getInt("codDueño"),
                                 rs.getString("Nombre")
-                        )
-                );
+                        );
             }
 
         } catch (SQLException ex) {
@@ -40,8 +36,11 @@ public class DuenyoBD {
 
         GestorBD.desconectar();
 
-        return listaDuenyos;
+        return duenyo;
     }
+
+    // Para saber los equipos que tiene el dueño
+
 
 }
 

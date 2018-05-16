@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import static grupo1.egibide.JugadorBD.jugadores;
+
 public class PantallaDuenyo1 {
     private JPanel panelMenuDuenyo;
     private JLabel tituloMenu1;
@@ -20,14 +22,13 @@ public class PantallaDuenyo1 {
     private JLabel menuConfeccionar;
     private JComboBox comboBoxEquipo;
 
-    private final List<Equipo> equipos = new ArrayList<>();
-    private List<Jugador> listaJugador = JugadorBD.jugadores();
-    private List<Duenyo> listaDuenyo = DuenyoBD.duenyos();
-    private List<Equipo> listaEquipos = EquipoBD.equipos();
+    private int codDuenyo;
+    private Object objEquipo;
+    private int equipoCodigo;
+    private String nombreEquipo;
 
 
-
-    public PantallaDuenyo1(List<Cuenta> cuentas) {
+    public PantallaDuenyo1(String nombre) {
         // VISUALIZAR LA VENTANA
         JFrame frame = new JFrame("PantallaDuenyo1");
         frame.setContentPane(panelMenuDuenyo);
@@ -35,27 +36,30 @@ public class PantallaDuenyo1 {
         frame.pack();
         frame.setVisible(true);
 
+        // Para obtener el código del dueño
+        codDuenyo = DuenyoBD.duenyo(nombre).getCodDuenyo();
+
+
+        // COMBOBOX EQUIPO: RELLENARLO DE LOS EQUIPOS DEL DUEÑO
+        List<Equipo> equiposDuenyo = EquipoBD.equipos(codDuenyo);
+        for (int i = 0; i < equiposDuenyo.size(); i++) {
+            String nomEquipo = equiposDuenyo.get(i).getNombre();
+            comboBoxEquipo.addItem(nomEquipo);
+        }
+
+
         // BOTÓN PARA CONFECCIONAR EQUIPO
         botonEquipos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PantallaConfeccionar ventanaConfeccionar = new PantallaConfeccionar(listaJugador);
+                // Para sacar el código del equipo que ha sido seleccionado he hecho esto
+                int numEquipo = comboBoxEquipo.getSelectedIndex();
+                equipoCodigo = equiposDuenyo.get(numEquipo).getCodEquipo();
+
+                PantallaConfeccionar ventanaConfeccionar = new PantallaConfeccionar(equipoCodigo);
             }
         });
 
-        // COMBOBOX EQUIPO: RELLENARLO DE LOS EQUIPOS DEL DUEÑO
-        for (int i = 0; i < cuentas.size(); i++) {
-            for (int j = 0; j < listaDuenyo.size(); j++) {
-                if (listaDuenyo.get(j).getNombre() == cuentas.get(i).getNombre()){
-                    for (int k = 0; k < listaEquipos.size(); k++) {
-                        comboBoxEquipo.addItem(listaEquipos.get(k).getNombre());
-
-                    }
-                }
-
-            }
-
-        }
 
     }
 
