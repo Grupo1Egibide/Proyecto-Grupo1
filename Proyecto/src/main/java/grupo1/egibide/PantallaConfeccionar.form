@@ -39,7 +39,7 @@
               </grid>
             </constraints>
             <properties>
-              <selectionMode value="2"/>
+              <selectionMode value="0"/>
               <toolTipText value=""/>
             </properties>
           </component>
@@ -67,7 +67,9 @@
                 <preferred-size width="150" height="50"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <selectionMode value="0"/>
+            </properties>
           </component>
           <component id="eef58" class="javax.swing.JButton" binding="botonGuardar">
             <constraints>

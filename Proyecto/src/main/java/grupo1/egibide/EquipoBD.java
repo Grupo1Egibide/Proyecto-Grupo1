@@ -9,18 +9,16 @@ import java.util.List;
 
 public class EquipoBD {
 
-    public static List<Equipo> equipos() {
+    // DEVUELVE LOS EQUIPOS QUE TIENE EL DUEÑO
+    public static List<Equipo> equipos(int codDuenyo) {
 
-        // Lista para dejar los objetos
         List<Equipo> listaEquipos = new ArrayList<>();
 
-        // Conexión a la BD
         Connection conexion = GestorBD.conectar();
 
         try {
-
             Statement st = conexion.createStatement();
-            String sql = "SELECT * FROM Equipo";
+            String sql = "SELECT * FROM Equipo WHERE Dueño_codDueño = " + codDuenyo;
             ResultSet rs = st.executeQuery(sql);
 
             while (rs.next()) {
@@ -28,11 +26,13 @@ public class EquipoBD {
                 listaEquipos.add(
                         new Equipo(
                                 rs.getInt("codEquipo"),
-                                rs.getString("nombre")
+                                rs.getString("nombre"),
+                                rs.getInt("anyoFundacion"),
+                                rs.getInt("Dueño_codDueño")
                         )
                 );
-            }
 
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -41,6 +41,36 @@ public class EquipoBD {
 
         return listaEquipos;
 
+
+    }
+
+    // DEVUELVE LAS PROPIEDADES DEL EQUIPO SELECCIONADO EN PANTALLADUENYO1
+    public static Equipo equipo(int codDuenyo, String nombreEquipo) {
+
+        Equipo equipo = null;
+
+        Connection conexion = GestorBD.conectar();
+
+        try {
+            Statement st = conexion.createStatement();
+            String sql = "SELECT * FROM Equipo WHERE Dueño_codDueño = " + codDuenyo + " AND nombre = '" + nombreEquipo + "'";
+            ResultSet rs = st.executeQuery(sql);
+
+            if (rs.next()) {
+                equipo = new Equipo(
+                        rs.getInt("codEquipo"),
+                        rs.getString("nombre"),
+                        rs.getInt("anyoFundacion"),
+                        rs.getInt("Dueño_codDueño")
+                );
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        GestorBD.desconectar();
+
+        return equipo;
 
     }
 
