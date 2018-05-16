@@ -7,6 +7,7 @@ public class Jugador extends Persona {
     private int salario;
     private String fechaAlta;
     private String posicion;
+    private String nombre;
 
     // CONSTRUCTORES
     public Jugador(int codJugador, String nombre, String nick, int salario, String fechaAlta, String posicion) {
@@ -16,6 +17,40 @@ public class Jugador extends Persona {
         this.salario = salario;
         this.fechaAlta = fechaAlta;
         this.posicion = posicion;
+    }
+
+    public Jugador(String nombre, String nick, int salario, String fechaAlta, String posicion, Equipo equipo) {
+        super(nombre);
+        this.nick = nick;
+        this.salario = salario;
+        this.fechaAlta = fechaAlta;
+        this.posicion = posicion;
+        this.equipo = equipo;
+    }
+
+    public Jugador(String dni, String nombre, String fechaNac, int edad, String poblacion, String nick, int salario, String fechaAlta, String posicion, Equipo equipo) {
+        super(dni, nombre, fechaNac, edad, poblacion);
+        this.codJugador=-1; //el jugador no existe
+        this.nick = nick;
+        this.salario = salario;
+        this.fechaAlta = fechaAlta;
+        this.posicion = posicion;
+        this.equipo = equipo;
+    }
+
+    public Jugador(String nombre) {
+        super(nombre);
+    }
+
+    public Jugador(int codJugador, String nombre, String nick, int salario, String fechaAlta, String posicion, int equipo_codEquipo) {
+        super(nombre);
+        this.codJugador = codJugador;
+        this.nick = nick;
+        this.salario = salario;
+        this.fechaAlta = fechaAlta;
+        this.posicion = posicion;
+        this.equipo = equipo;
+
     }
 
     // GETTERS Y SETTERS
@@ -72,12 +107,12 @@ public class Jugador extends Persona {
     // toString (PONGO SOLO EL NOMBRE, PARA QUE EN LAS JLIST APAREZCA SOLO EL NOMBRE)
     @Override
     public String toString() {
-        return nombre;
+        return nick ;
     }
 
     // ASOCIACIONES
     private Equipo equipo;
-
+    private VerJugador verjugador1;
     public Equipo getEquipo() {
         return equipo;
     }

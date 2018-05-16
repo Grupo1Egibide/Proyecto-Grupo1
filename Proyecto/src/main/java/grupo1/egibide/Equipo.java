@@ -26,6 +26,10 @@ public class Equipo {
         this.partido = partido;
     }
 
+    public Equipo(int codEquipo, String nombre) {
+        this.codEquipo = codEquipo;
+        this.nombre = nombre;
+    }
 
     public Equipo(String nombre, int anyoFundacion, Duenyo duenyo, List<Jugador> jugadores, Partido partido) {
         this.codEquipo = -1;
