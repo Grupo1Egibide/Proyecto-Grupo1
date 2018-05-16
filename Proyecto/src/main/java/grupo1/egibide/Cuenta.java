@@ -44,5 +44,8 @@ public class Cuenta {
                 '}';
     }
 
+    // ASOCIACIÓN
+    private Duenyo duenyo;
+
 
 }

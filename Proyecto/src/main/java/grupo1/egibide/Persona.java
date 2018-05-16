@@ -15,6 +15,7 @@ public class Persona {
 
     Connection conexion=GestorBD.conectar();
 
+ /*
     // CONSTRUCTORES
     public Persona(String dni, String nombre, String fechaNac, int edad, String poblacion) {
         this.dni = dni;
@@ -27,6 +28,7 @@ public class Persona {
     public Persona(String nombre) {
 
     }
+    */
 
 
     // GETTERS Y SETTERS

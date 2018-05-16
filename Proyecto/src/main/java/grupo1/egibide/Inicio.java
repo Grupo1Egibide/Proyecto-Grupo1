@@ -20,6 +20,7 @@ public class Inicio {
 
     // LISTA DE CUENTAS
     List<Cuenta> cuentas = CuentaBD.cuentas();
+    private String nombreCuenta;
 
 
     // PARA VISUALIZAR EL LOGIN
@@ -35,6 +36,7 @@ public class Inicio {
     public Inicio() { //Al pulsar en los iconos del menú
 
         Connection conexion = GestorBD.conectar();
+
 
         enviar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -70,7 +72,9 @@ public class Inicio {
                             PantallaAdmin ventanaAdmin = new PantallaAdmin();
 
                         } else if (cuentas.get(y).getTipoCuenta() == 2) { //ES DUEÑO
-                            PantallaDuenyo1 ventanaDuenyo = new PantallaDuenyo1(cuentas);
+                            nombreCuenta = usuario.getText();
+                            PantallaDuenyo1 ventanaDuenyo = new PantallaDuenyo1(nombreCuenta);
+
 
                         } else if (cuentas.get(y).getTipoCuenta() == 3) {//ES USUARIO
                             PantallaUsuario ventanaUsuario = new PantallaUsuario(cuentas);
@@ -89,18 +93,8 @@ public class Inicio {
     }
 
 
-        /*
-        // PRUEBA: VER LOS JUGADORES DE LA BD
-        List<Jugador> listaJugador = JugadorBD.jugadores();
-        System.out.println(listaJugador);
 
-        // PRUEBA: VER LOS EQUIPOS DE LA BD
-        List<Equipo> listaEquipo = EquipoBD.equipos();
-        System.out.println(listaEquipo);
 
-        // PRUEBA: VER LOS DUEÑOS DE LA BD
-        List<Duenyo> listaDuenyo = DuenyoBD.duenyos();
-        System.out.println(listaDuenyo);
-        */
+
 
 }
