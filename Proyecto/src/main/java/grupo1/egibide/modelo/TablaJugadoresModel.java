@@ -9,21 +9,27 @@ import java.util.List;
 
 public class TablaJugadoresModel extends AbstractTableModel {
 
-    private int viaje;
+    private int jugador;
 
     public TablaJugadoresModel() {
-        this.viaje = -1;
+        this.jugador = -1;
         jugadores = new ArrayList<>();
     }
 
-   /* public TablaJugadoresModel(int viaje) {
-        this.viaje = viaje;
-        jugadores = JugadorBD.buscarJugador(viaje);
-    }*/
+    public TablaJugadoresModel(int codJugador) {
+        this.jugador = jugador;
+        jugadores = new ArrayList<>();
+        jugadores.add(JugadorBD.buscarJugador(codJugador));
+    }
 
-    private String[] columnas = {"Nombre", "Nick", "Salario", "Fecha Alta"};
+    private String[] columnas = {"Codigo Jugador", "Nick", "Salario", "Fecha Alta","Posicion"};
 
     private List<Jugador> jugadores;
+
+    @Override
+    public String getColumnName(int column) {
+        return columnas[column];
+    }
 
     @Override
     public int getRowCount() {
@@ -44,13 +50,13 @@ public class TablaJugadoresModel extends AbstractTableModel {
             case 0:
                 return e.getCodJugador();
             case 1:
-                return e.getNombre();
-            case 2:
                 return e.getNick();
-            case 3:
+            case 2:
                 return e.getSalario();
-            case 4:
+            case 3:
                 return e.getFechaAlta();
+            case 4:
+                return e.getPosicion();
         }
 
         return null;

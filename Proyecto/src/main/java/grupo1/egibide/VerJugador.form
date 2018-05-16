@@ -23,7 +23,7 @@
               <splitpane position="left"/>
             </constraints>
             <properties/>
-            <border type="none" title="ID"/>
+            <border type="none" title="Nick"/>
             <children>
               <component id="75e7a" class="javax.swing.JList" binding="listaJugador">
                 <constraints>

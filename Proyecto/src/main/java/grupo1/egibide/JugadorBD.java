@@ -50,40 +50,42 @@ public class JugadorBD {
 
 
     }
-//BUSCAR UN JUGADOR DETERMINADO
-public static Jugador buscarJugador(int codigo) {
 
-    Jugador JUGADOR = null;
+    //BUSCAR UN JUGADOR DETERMINADO
+    public static Jugador buscarJugador(int codigo) {
 
-    Connection conexion = GestorBD.conectar();
+        Jugador JUGADOR = null;
 
-    try {
+        Connection conexion = GestorBD.conectar();
 
-        Statement st = conexion.createStatement();
-        String sql = "SELECT * FROM Jugador where codJugador =" + codigo;
-        ResultSet rs = st.executeQuery(sql);
+        try {
 
-        if (rs.next()) {
+            Statement st = conexion.createStatement();
+            String sql = "SELECT * FROM Jugador where codJugador =" + codigo;
+            ResultSet rs = st.executeQuery(sql);
 
-            JUGADOR = new Jugador(
-                    rs.getInt("Codigo Jugador"),
-                    rs.getString("Nombre"),
-                    rs.getString("Nick"),
-                    rs.getInt("Salario"),
-                    rs.getString("Fecha alta"),
-                    rs.getString("Posicion"),
-                    rs.getInt("Codigo equipo")
-            );
+            if (rs.next()) {
+
+                JUGADOR = new Jugador(
+                        rs.getInt("codJugador"),
+                        rs.getString("Nombre"),
+                        rs.getString("Nick"),
+                        rs.getInt("Salario"),
+                        rs.getString("FechaAlta"),
+                        rs.getString("Posicion"),
+                        rs.getInt("Equipo_codEquipo")
+                );
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
 
-    } catch (SQLException ex) {
-        ex.printStackTrace();
+        GestorBD.desconectar();
+
+        return JUGADOR;
     }
 
-    GestorBD.desconectar();
-
-    return JUGADOR;
-}
     //Guardamos un nuevo jugador
     public static void guardar(Jugador jugador) {
 
@@ -94,7 +96,7 @@ public static Jugador buscarJugador(int codigo) {
             String sql;
             java.sql.PreparedStatement st;
 
-            if(jugador.getCodJugador()==-1) {
+            if (jugador.getCodJugador() == -1) {
                 sql = "INSERT INTO Jugador (`nombre`, `nick`, `salario`, `fechaAlta`, `Equipo_codEquipo`,`posicion`) " +
                         "VALUES (?,?,?,?,?,?)";
                 st = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -109,13 +111,11 @@ public static Jugador buscarJugador(int codigo) {
                 st.setString(4, jugador.getFechaAlta());
                 st.setInt(5, jugador.getEquipo().getCodEquipo());
                 st.setString(6, jugador.getPosicion());
-            }else{
-                sql = "UPDATE Jugador SET nombre=?, nick=?, salario=?, fechaAlta=?, Equipo_codEquipo=?, posicion=?) ";
-                st = conexion.prepareStatement(sql);
+            } else {
+                sql = "UPDATE Jugador SET nombre=?, nick=?, salario=?, fechaAlta=?, Equipo_codEquipo=?, posicion=? " +
+                        "WHERE codJugador =" + jugador.getCodJugador();
 
-                st.setString(1, jugador.getNombre());
-                st.setString(2, jugador.getNick());
-                st.setInt(3, jugador.getSalario());
+                st = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 st.setString(4, jugador.getFechaAlta());
                 st.setInt(5, jugador.getEquipo().getCodEquipo());
                 st.setString(6, jugador.getPosicion());

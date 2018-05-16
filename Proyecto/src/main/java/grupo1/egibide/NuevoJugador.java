@@ -32,7 +32,7 @@ public class NuevoJugador {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-        //System.out.println(JugadorBD.buscarJugador("silvia"));
+
         crearButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) { //Al pulsar crear
@@ -60,7 +60,6 @@ public class NuevoJugador {
                 }
 
 
-
                 //Creamos el objeto tipo Jugador con los datos
                 Jugador crearJugador = new Jugador(dni.getText(), nombre.getText(), fechaNacimieto.getText(), edad1,
                         poblacion.getText(), nick.getText(), salario1, fechaAlta.getText(),
@@ -70,11 +69,6 @@ public class NuevoJugador {
 
                 //Actualizamos la clase con la BBDD
                 jugadores = JugadorBD.jugadores();
-                while (i < jugadores.size()) {
-                    System.out.println(jugadores.get(i).getNick());
-                    i++;
-                }
-
 
             }
         });

@@ -23,7 +23,7 @@ public class VerJugador {
 
         // Cargar los usuarios en la lista
         jugadores = JugadorBD.jugadores();
-        ActualizarListaJugadores();
+        actualizarListaViajes();
 
         //tabla vacia
         tabla = new JTable();
@@ -31,15 +31,32 @@ public class VerJugador {
 
         panelJugadores.setViewportView(tabla);
 
+    // Cuando se pulsa en un codigo, actualizar la lista de jugadores
+        listaJugador.addListSelectionListener(e -> {
 
+            Jugador j = (Jugador) listaJugador.getSelectedValue();
+
+            if (j != null) {
+                tabla.setModel(new TablaJugadoresModel(j.getCodJugador()));
+            }
+        });
+    }
+
+    private void actualizarListaViajes() {
+        DefaultListModel<Jugador> modelo = new DefaultListModel<>();
+
+        for (Jugador j : jugadores) {
+            modelo.addElement(j);
+        }
+
+        listaJugador.setModel(modelo);
     }
 
     public JPanel getPanel() {
         return panel9;
     }
 
-    private void ActualizarListaJugadores() {
-    }
+
 
 
 }

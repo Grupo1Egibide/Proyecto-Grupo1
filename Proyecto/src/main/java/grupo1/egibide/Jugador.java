@@ -20,6 +20,15 @@ public class Jugador extends Persona {
         this.equipo = equipo;
     }
 
+    public Jugador(String nombre, String nick, int salario, String fechaAlta, String posicion, Equipo equipo) {
+        super(nombre);
+        this.nick = nick;
+        this.salario = salario;
+        this.fechaAlta = fechaAlta;
+        this.posicion = posicion;
+        this.equipo = equipo;
+    }
+
     public Jugador(String dni, String nombre, String fechaNac, int edad, String poblacion, String nick, int salario, String fechaAlta, String posicion, Equipo equipo) {
         super(dni, nombre, fechaNac, edad, poblacion);
         this.codJugador=-1; //el jugador no existe
@@ -91,14 +100,7 @@ public class Jugador extends Persona {
     // toString
     @Override
     public String toString() {
-        return "Jugador{" +
-                "codJugador=" + codJugador +
-                ", nick='" + nick + '\'' +
-                ", salario=" + salario +
-                ", fechaAlta='" + fechaAlta + '\'' +
-                ", posicion='" + posicion + '\'' +
-                ", equipo=" + equipo +
-                '}';
+        return nick ;
     }
 
     // ASOCIACIONES

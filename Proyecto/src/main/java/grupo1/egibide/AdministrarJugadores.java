@@ -33,5 +33,17 @@ public class AdministrarJugadores {
                 VerJugador verjugadores=new VerJugador();
             }
         });
+        actualizarJugadorButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ActualizarJugador pantallaActualizarJugador=new ActualizarJugador();
+            }
+        });
+        eliminarJugadorButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { //Eliminar
+                EliminarJugador pantallaborrarjugador=new EliminarJugador();
+            }
+        });
     }
 }
