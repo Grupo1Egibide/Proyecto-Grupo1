@@ -21,7 +21,7 @@ public class Inicio {
     // LISTA DE CUENTAS
     List<Cuenta> cuentas = CuentaBD.cuentas();
     private String nombreCuenta;
-
+    List<Jugador> jugadores = JugadorBD.jugadores();
 
     // PARA VISUALIZAR EL LOGIN
     public static void main(String[] args) {
@@ -30,6 +30,7 @@ public class Inicio {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+
     }
 
 
@@ -37,11 +38,16 @@ public class Inicio {
 
         Connection conexion = GestorBD.conectar();
 
+        int y = 0;
+      /*  System.out.println(jugadores.size());
+        while(y<jugadores.size()){
+            System.out.println(jugadores.get(y).getNick());
+        }*/
 
         enviar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //Al pulsar enviar...
-            //DEPURAR
+                //DEPURAR
 
                 //NO nos ha metido datos
                 if (usuario.getText().equalsIgnoreCase("") && contraseña.getText().equalsIgnoreCase("")) {
@@ -80,7 +86,7 @@ public class Inicio {
                         } else if (cuentas.get(y).getTipoCuenta() == 3) {//ES USUARIO
                             PantallaUsuario ventanaUsuario = new PantallaUsuario(cuentas);
 
-                            
+
                         }
 
                     } else {
@@ -92,10 +98,6 @@ public class Inicio {
             }
         });
     }
-
-
-
-
 
 
 }

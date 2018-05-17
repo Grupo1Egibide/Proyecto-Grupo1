@@ -10,7 +10,7 @@ import java.util.List;
 public class EquipoBD {
 
     // DEVUELVE LOS EQUIPOS QUE TIENE EL DUEÑO
-    public static List<Equipo> equipos(int codDuenyo) {
+     public static List<Equipo> equipos(/*int codDuenyo*/) {
 
         List<Equipo> listaEquipos = new ArrayList<>();
 
@@ -18,7 +18,7 @@ public class EquipoBD {
 
         try {
             Statement st = conexion.createStatement();
-            String sql = "SELECT * FROM Equipo WHERE Dueño_codDueño = " + codDuenyo;
+            String sql = "SELECT * FROM Equipo" /*WHERE Dueño_codDueño = " + codDuenyo*/;
             ResultSet rs = st.executeQuery(sql);
 
             while (rs.next()) {
@@ -26,9 +26,9 @@ public class EquipoBD {
                 listaEquipos.add(
                         new Equipo(
                                 rs.getInt("codEquipo"),
-                                rs.getString("nombre"),
-                                rs.getInt("anyoFundacion"),
-                                rs.getInt("Dueño_codDueño")
+                                rs.getString("nombre")
+                                /*rs.getInt("anyoFundacion"),
+                                rs.getInt("Dueño_codDueño")*/
                         )
                 );
 
@@ -43,7 +43,39 @@ public class EquipoBD {
 
 
     }
+//METODOS IZARO
+// DEVUELVE LOS EQUIPOS QUE TIENE EL DUEÑO
+public static List<Equipo> equipos1(int codDuenyo) {
 
+    List<Equipo> listaEquipos = new ArrayList<>();
+
+    Connection conexion = GestorBD.conectar();
+
+    try {
+        Statement st = conexion.createStatement();
+        String sql = "SELECT * FROM Equipo WHERE Dueño_codDueño = " + codDuenyo;
+        ResultSet rs = st.executeQuery(sql);
+
+        while (rs.next()) {
+
+            listaEquipos.add(
+                    new Equipo(
+                            rs.getInt("codEquipo"),
+                            rs.getString("nombre"),
+                            rs.getInt("anyoFundacion"),
+                            rs.getInt("Dueño_codDueño")
+                    )
+            );
+
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+
+    GestorBD.desconectar();
+
+    return listaEquipos;
+}
     // DEVUELVE LAS PROPIEDADES DEL EQUIPO SELECCIONADO EN PANTALLADUENYO1
     public static Equipo equipo(int codDuenyo, String nombreEquipo) {
 
