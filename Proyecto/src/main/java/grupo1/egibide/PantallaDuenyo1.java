@@ -41,7 +41,7 @@ public class PantallaDuenyo1 {
 
 
         // COMBOBOX EQUIPO: RELLENARLO DE LOS EQUIPOS DEL DUEÑO
-        List<Equipo> equiposDuenyo = EquipoBD.equipos(codDuenyo);
+        List<Equipo> equiposDuenyo = EquipoBD.equipos1(codDuenyo);
         for (int i = 0; i < equiposDuenyo.size(); i++) {
             String nomEquipo = equiposDuenyo.get(i).getNombre();
             comboBoxEquipo.addItem(nomEquipo);

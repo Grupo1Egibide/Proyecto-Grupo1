@@ -16,7 +16,11 @@ public class Equipo {
         this.duenyo = duenyo;
     }
 
-   /*
+    public Equipo(int codEquipo, String nombre) {
+        this.codEquipo = codEquipo;
+        this.nombre = nombre;
+    }
+/*
     public Equipo(int codEquipo, String nombre, int anyoFundacion, Duenyo duenyo, List<Jugador> jugadores, Partido partido) {
         this.codEquipo = codEquipo;
         this.nombre = nombre;
@@ -90,13 +94,13 @@ public class Equipo {
         this.jugadores = jugadores;
     }
 
-    public Partido getPartido() {
+   /* public Partido getPartido() {
         return partido;
     }
 
     public void setPartido(Partido partido) {
         this.partido = partido;
-    }
+    }*/
 
     // toString
     @Override
@@ -113,7 +117,7 @@ public class Equipo {
     // ASOCIACIONES
     private int duenyo;
     private List<Jugador> jugadores;
-    private Partido partido;
+    // private Partido partido;
 
 
     private List<Jugador> listaJugadores = new ArrayList<>();
