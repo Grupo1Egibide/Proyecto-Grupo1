@@ -64,6 +64,7 @@ public class NuevoJugador {
                 Jugador crearJugador = new Jugador(dni.getText(), nombre.getText(), fechaNacimieto.getText(), edad1,
                         poblacion.getText(), nick.getText(), salario1, fechaAlta.getText(),
                         posicion.getText(), equipoEncontrado);
+
                 //Lo guardamos en la BBDD
                 JugadorBD.guardar(crearJugador);
 

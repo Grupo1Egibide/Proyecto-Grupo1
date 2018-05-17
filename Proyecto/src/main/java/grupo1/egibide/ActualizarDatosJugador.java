@@ -14,6 +14,10 @@ public class ActualizarDatosJugador {
     private JTextField codEquipo;
     private JButton ModificarButton;
     private JTextField posicion;
+    private JTextField dni;
+    private JTextField edad;
+    private JTextField poblacion;
+    private JTextField fechaNacimieto;
     private List<Jugador> jugadores;
     private List<Equipo> equipos = EquipoBD.equipos();
 
@@ -24,8 +28,19 @@ public class ActualizarDatosJugador {
         frame.pack();
         frame.setVisible(true);
 
+        String dni1 = dni.setText("111");
+        String nombre1 = nombre.setText("juan");
+        int edad1 = Integer.parseInt(edad.setText(15));
+        String poblacion1 = poblacion.setText("murcia");
+
         String salario1 = Integer.toString(jugador.getSalario());
         String codEquipo1 = Integer.toString(jugador.getCodJugador());
+        String fechaNacimiento = "123";
+      /*  int edad1 = 0;
+        String dni = "123";
+        String nombre = "a";
+        String poblacion = "murcia";*/
+        int codJugadorEncontrado;
 
         // Cargar los usuarios en la lista
         jugadores = JugadorBD.jugadores();
@@ -58,12 +73,20 @@ public class ActualizarDatosJugador {
                 }
 
                 //Creamos el objeto tipo Jugador con los datos
-           /*   Jugador crearJugador = new Jugador(nick.getText(), salario2, fechaAlta.getText(),
-                        posicion.getText(), equipoEncontrado);*/
-                //Lo guardamos en la BBDD
-                // JugadorBD.guardar(crearJugador);
+               /* Jugador crearJugador = new Jugador(dni, nombre, fechaNacimiento, edad1, poblacion,
+                        nick.getText(), salario2, fechaAlta.getText(), posicion.getText(),
+                        equipoEncontrado);*/
+                Jugador crearJugador = new Jugador(dni.getText(), nombre.getText(), fechaNacimieto.getText(), eda,
+                        poblacion.getText(), nick.getText(), salario1, fechaAlta.getText(),
+                        posicion.getText(), equipoEncontrado);
 
-                //Actualizamos la clase con la BBDDjugadores = JugadorBD.jugadores();
+                System.out.println(crearJugador.getNombre());
+
+                //Lo guardamos en la BBDD
+                JugadorBD.guardar(crearJugador);
+
+                //Actualizamos la clase con la BBDD
+                jugadores = JugadorBD.jugadores();
 
             }
         });

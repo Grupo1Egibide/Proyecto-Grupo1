@@ -7,6 +7,7 @@ public class Jugador extends Persona {
     private int salario;
     private String fechaAlta;
     private String posicion;
+    private int codEquipo1;
 
     // CONSTRUCTORES
     public Jugador(int codJugador, String nombre, String nick, int salario, String fechaAlta, String posicion) {
@@ -28,7 +29,7 @@ public class Jugador extends Persona {
     }
 
     public Jugador(String dni, String nombre, String fechaNac, int edad, String poblacion, String nick, int salario, String fechaAlta, String posicion, Equipo equipo) {
-        this.codJugador=-1; //el jugador no existe
+        //this.codJugador=-1; //el jugador no existe
         this.nick = nick;
         this.salario = salario;
         this.fechaAlta = fechaAlta;
@@ -50,6 +51,16 @@ public class Jugador extends Persona {
         this.equipo = equipo;
 
     }
+
+    public int getCodEquipo1() {
+        return codEquipo1;
+    }
+
+    public void setCodEquipo1(int codEquipo1) {
+        this.codEquipo1 = codEquipo1;
+    }
+
+
 
     // GETTERS Y SETTERS
     public int getCodJugador() {

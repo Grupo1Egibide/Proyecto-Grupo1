@@ -60,7 +60,7 @@ public static List<Jugador> jugadores1(int codEquipo) {
     try {
 
         Statement st = conexion.createStatement();
-        String sql = "SELECT * FROM JugadorWHERE Equipo_codEquipo = " + codEquipo;
+        String sql = "SELECT * FROM Jugador WHERE Equipo_codEquipo = " + codEquipo;
         ResultSet rs = st.executeQuery(sql);
 
         while (rs.next()) {
@@ -151,10 +151,14 @@ public static List<Jugador> jugadores1(int codEquipo) {
             } else {
                 sql = "UPDATE Jugador SET nombre=?, nick=?, salario=?, fechaAlta=?, Equipo_codEquipo=?, posicion=? " +
                         "WHERE codJugador =" + jugador.getCodJugador();
-
+              /*  System.out.println(jugador.getNombre());
+                System.out.println(jugador.getNick());*/
                 st = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                st.setString(1, jugador.getNombre());
+                st.setString(2, jugador.getNick());
+                st.setInt(3, jugador.getSalario());
                 st.setString(4, jugador.getFechaAlta());
-                st.setInt(5, jugador.getEquipo().getCodEquipo());
+                st.setInt(5, jugador.getCodEquipo1());
                 st.setString(6, jugador.getPosicion());
 
             }
