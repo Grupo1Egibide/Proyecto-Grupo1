@@ -16,7 +16,11 @@ public class Equipo {
         this.duenyo = duenyo;
     }
 
-   /*
+    public Equipo(int codEquipo, String nombre) {
+        this.codEquipo = codEquipo;
+        this.nombre = nombre;
+    }
+/*
     public Equipo(int codEquipo, String nombre, int anyoFundacion, Duenyo duenyo, List<Jugador> jugadores, Partido partido) {
         this.codEquipo = codEquipo;
         this.nombre = nombre;

@@ -39,7 +39,7 @@ public class PantallaConfeccionar {
 
 
         // JUGADORES DEL EQUIPO (JUGADORES QUE TIENEN CODIGO DE EQUIPO)
-        List<Jugador> jugadoresEquipo = JugadorBD.jugadores(codEquipo);
+        List<Jugador> jugadoresEquipo = JugadorBD.jugadores1(codEquipo);
 
         // JUGADORES DISPONIBLES (JUGADORES QUE NO TIENEN CÓDIGO DE EQUIPO)
         List<Jugador> jugadoresDisponibles = JugadorBD.jugadoresDisponibles();

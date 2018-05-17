@@ -1,7 +1,5 @@
 package grupo1.egibide;
 
-import com.mysql.cj.jdbc.PreparedStatement;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +11,7 @@ import java.util.List;
 public class JugadorBD {
 
     // SABER LOS JUGADORES QUE TIENE EL EQUIPO
-    public static List<Jugador> jugadores(int codEquipo) {
+    public static List<Jugador> jugadores(/*int codEquipo*/) {
 
         // Lista para dejar los objetos
         List<Jugador> listaJugadores = new ArrayList<>();
@@ -24,7 +22,7 @@ public class JugadorBD {
         try {
 
             Statement st = conexion.createStatement();
-            String sql = "SELECT * FROM Jugador WHERE Equipo_codEquipo = " + codEquipo;
+            String sql = "SELECT * FROM Jugador"; //WHERE Equipo_codEquipo = " + codEquipo;
             ResultSet rs = st.executeQuery(sql);
 
             while (rs.next()) {
@@ -51,6 +49,45 @@ public class JugadorBD {
 
 
     }
+// METODO IZARO
+public static List<Jugador> jugadores1(int codEquipo) {
+
+    // Lista para dejar los objetos
+    List<Jugador> listaJugadores = new ArrayList<>();
+
+    // Conexión a la BD
+    Connection conexion = GestorBD.conectar();
+
+    try {
+
+        Statement st = conexion.createStatement();
+        String sql = "SELECT * FROM JugadorWHERE Equipo_codEquipo = " + codEquipo;
+        ResultSet rs = st.executeQuery(sql);
+
+        while (rs.next()) {
+
+            listaJugadores.add(
+                    new Jugador(
+                            rs.getInt("codJugador"),
+                            rs.getString("nombre"),
+                            rs.getString("nick"),
+                            rs.getInt("salario"),
+                            rs.getString("fechaAlta"),
+                            rs.getString("posicion")
+                    )
+            );
+        }
+
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+
+    GestorBD.desconectar();
+
+    return listaJugadores;
+
+
+}
 
     //BUSCAR UN JUGADOR DETERMINADO
     public static Jugador buscarJugador(int codigo) {
