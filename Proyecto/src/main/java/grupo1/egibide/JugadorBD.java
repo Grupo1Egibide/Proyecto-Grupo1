@@ -158,7 +158,9 @@ public static List<Jugador> jugadores1(int codEquipo) {
                 st.setString(2, jugador.getNick());
                 st.setInt(3, jugador.getSalario());
                 st.setString(4, jugador.getFechaAlta());
-                st.setInt(5, jugador.getCodEquipo1());
+                st.setInt(5, jugador.getEquipo().getCodEquipo());
+
+               // System.out.println(jugador.getCodEquipo1());
                 st.setString(6, jugador.getPosicion());
 
             }

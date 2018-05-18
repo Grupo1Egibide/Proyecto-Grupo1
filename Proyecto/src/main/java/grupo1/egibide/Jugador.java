@@ -19,17 +19,27 @@ public class Jugador extends Persona {
         this.posicion = posicion;
     }
 
-    public Jugador(String nombre, String nick, int salario, String fechaAlta, String posicion, Equipo equipo) {
-        this.nombre=nombre;
+    public Jugador(String nombre, String nick, int salario, String fechaAlta, String posicion, Equipo equipo) { //No existe y lo creamos
+       // this.codJugador=-1; //no existe
+        this.nombre = nombre;
         this.nick = nick;
         this.salario = salario;
         this.fechaAlta = fechaAlta;
         this.posicion = posicion;
         this.equipo = equipo;
     }
-
+//dwd
+    public Jugador(int codJugador, String dni, String nombre, String fechaNac, int edad, String poblacion, String nick, int salario, String fechaAlta, String posicion, Equipo equipo) {
+    this.codJugador=codJugador; //el jugador existe
+    this.codJugador=getCodJugador();
+    this.nick = nick;
+    this.salario = salario;
+    this.fechaAlta = fechaAlta;
+    this.posicion = posicion;
+    this.equipo = equipo;
+}
     public Jugador(String dni, String nombre, String fechaNac, int edad, String poblacion, String nick, int salario, String fechaAlta, String posicion, Equipo equipo) {
-        //this.codJugador=-1; //el jugador no existe
+        this.codJugador=-1; //el jugador NO existe
         this.nick = nick;
         this.salario = salario;
         this.fechaAlta = fechaAlta;
@@ -38,11 +48,11 @@ public class Jugador extends Persona {
     }
 
     public Jugador(String nombre) {
-        this.nombre=nombre;
+        this.nombre = nombre;
     }
 
-    public Jugador(int codJugador, String nombre, String nick, int salario, String fechaAlta, String posicion, int equipo_codEquipo) {
-        this.nombre=nombre;
+    public Jugador(int codJugador, String nombre, String nick, int salario, String fechaAlta, String posicion, int equipo_codEquipo) { //existe y le pasamos el codigo del jugador
+        this.nombre = nombre;
         this.codJugador = codJugador;
         this.nick = nick;
         this.salario = salario;
@@ -59,7 +69,6 @@ public class Jugador extends Persona {
     public void setCodEquipo1(int codEquipo1) {
         this.codEquipo1 = codEquipo1;
     }
-
 
 
     // GETTERS Y SETTERS
@@ -116,12 +125,13 @@ public class Jugador extends Persona {
     // toString (PONGO SOLO EL NOMBRE, PARA QUE EN LAS JLIST APAREZCA SOLO EL NOMBRE)
     @Override
     public String toString() {
-        return nick ;
+        return nick;
     }
 
     // ASOCIACIONES
     private Equipo equipo;
     private VerJugador verjugador1;
+
     public Equipo getEquipo() {
         return equipo;
     }

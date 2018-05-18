@@ -28,18 +28,17 @@ public class ActualizarDatosJugador {
         frame.pack();
         frame.setVisible(true);
 
-        String dni1 = dni.setText("111");
-        String nombre1 = nombre.setText("juan");
-        int edad1 = Integer.parseInt(edad.setText(15));
-        String poblacion1 = poblacion.setText("murcia");
+        dni.setText("111");
+        nombre.setText("juan");
+        edad.setText("1500"); //le damos un valor en String
+        int edad2 = Integer.parseInt(edad.getText()); //lo convertimos a int
+        poblacion.setText("murcia");
+        fechaNacimieto.setText("01-03-97");
 
         String salario1 = Integer.toString(jugador.getSalario());
         String codEquipo1 = Integer.toString(jugador.getCodJugador());
-        String fechaNacimiento = "123";
-      /*  int edad1 = 0;
-        String dni = "123";
-        String nombre = "a";
-        String poblacion = "murcia";*/
+
+
         int codJugadorEncontrado;
 
         // Cargar los usuarios en la lista
@@ -76,11 +75,10 @@ public class ActualizarDatosJugador {
                /* Jugador crearJugador = new Jugador(dni, nombre, fechaNacimiento, edad1, poblacion,
                         nick.getText(), salario2, fechaAlta.getText(), posicion.getText(),
                         equipoEncontrado);*/
-                Jugador crearJugador = new Jugador(dni.getText(), nombre.getText(), fechaNacimieto.getText(), eda,
-                        poblacion.getText(), nick.getText(), salario1, fechaAlta.getText(),
+                Jugador crearJugador = new Jugador(jugador.getCodJugador(), dni.getText(), nombre.getText(), fechaNacimieto.getText(), edad2,
+                        poblacion.getText(), nick.getText(), salario2, fechaAlta.getText(),
                         posicion.getText(), equipoEncontrado);
 
-                System.out.println(crearJugador.getNombre());
 
                 //Lo guardamos en la BBDD
                 JugadorBD.guardar(crearJugador);
