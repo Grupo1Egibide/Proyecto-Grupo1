@@ -78,7 +78,7 @@ public class ActualizarDatosJugador {
                 Jugador crearJugador = new Jugador(jugador.getCodJugador(), dni.getText(), nombre.getText(), fechaNacimieto.getText(), edad2,
                         poblacion.getText(), nick.getText(), salario2, fechaAlta.getText(),
                         posicion.getText(), equipoEncontrado);
-
+                System.out.println(equipoEncontrado.getCodEquipo());
 
                 //Lo guardamos en la BBDD
                 JugadorBD.guardar(crearJugador);

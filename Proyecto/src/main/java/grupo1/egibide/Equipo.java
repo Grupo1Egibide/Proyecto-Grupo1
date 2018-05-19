@@ -7,6 +7,24 @@ public class Equipo {
     private int codEquipo;
     private String nombre;
     private int anyoFundacion;
+    private int dueño;
+    private Duenyo duenyo1;
+
+    public Duenyo getDuenyo1() {
+        return duenyo1;
+    }
+
+    public void setDuenyo1(Duenyo duenyo1) {
+        this.duenyo1 = duenyo1;
+    }
+
+    public int getDueño() {
+        return dueño;
+    }
+
+    public void setDueño(int dueño) {
+        this.dueño = dueño;
+    }
 
     // CONSTRUCTORES
     public Equipo(int codEquipo, String nombre, int anyoFundacion, int duenyo) {
@@ -15,7 +33,22 @@ public class Equipo {
         this.anyoFundacion = anyoFundacion;
         this.duenyo = duenyo;
     }
+//CONSTRUCTORES DIEGO
 
+
+    public Equipo(int codEquipo, String nombre, Duenyo duenyo1) { //el equipo SI EXISTE
+        this.codEquipo = codEquipo;
+        this.nombre = nombre;
+        this.duenyo1=duenyo1;
+    }
+
+    public Equipo(String nombre, Duenyo duenyo1) {//el equipo NO EXISTE
+        this.codEquipo=-1;
+        this.nombre = nombre;
+        this.duenyo1 = duenyo1;
+    }
+
+    //FIN
     public Equipo(int codEquipo, String nombre) {
         this.codEquipo = codEquipo;
         this.nombre = nombre;
@@ -103,7 +136,7 @@ public class Equipo {
     }*/
 
     // toString
-    @Override
+    /*@Override
     public String toString() {
         return "Equipo{" +
                 "codEquipo=" + codEquipo +
@@ -111,8 +144,14 @@ public class Equipo {
                 ", anyoFundacion=" + anyoFundacion +
                 ", duenyo=" + duenyo +
                 '}';
-    }
+    }*/
 
+    @Override
+    public String toString() {
+        return "Equipo{" +
+                "nombre='" + nombre + '\'' +
+                '}';
+    }
 
     // ASOCIACIONES
     private int duenyo;

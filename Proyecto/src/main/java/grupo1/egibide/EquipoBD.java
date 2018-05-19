@@ -1,5 +1,7 @@
 package grupo1.egibide;
 
+import grupo1.egibide.modelo.TablaJugadoresModel;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,8 +11,8 @@ import java.util.List;
 
 public class EquipoBD {
 
-    // DEVUELVE LOS EQUIPOS QUE TIENE EL DUEÑO
-     public static List<Equipo> equipos(/*int codDuenyo*/) {
+    // DEVUELVE TODOS LOS EQUIPOS
+    public static List<Equipo> equipos(/*int codDuenyo*/) {
 
         List<Equipo> listaEquipos = new ArrayList<>();
 
@@ -43,39 +45,132 @@ public class EquipoBD {
 
 
     }
-//METODOS IZARO
-// DEVUELVE LOS EQUIPOS QUE TIENE EL DUEÑO
-public static List<Equipo> equipos1(int codDuenyo) {
 
-    List<Equipo> listaEquipos = new ArrayList<>();
+    //Guardamos un nuevo jugador
+    public static void guardar(Equipo equipo) {
 
-    Connection conexion = GestorBD.conectar();
+        Connection conexion = GestorBD.conectar();
 
-    try {
-        Statement st = conexion.createStatement();
-        String sql = "SELECT * FROM Equipo WHERE Dueño_codDueño = " + codDuenyo;
-        ResultSet rs = st.executeQuery(sql);
+        try {
 
-        while (rs.next()) {
+            String sql;
+            java.sql.PreparedStatement st;
 
-            listaEquipos.add(
-                    new Equipo(
-                            rs.getInt("codEquipo"),
-                            rs.getString("nombre"),
-                            rs.getInt("anyoFundacion"),
-                            rs.getInt("Dueño_codDueño")
-                    )
-            );
+            if (equipo.getCodEquipo() == -1) {
+                sql = "INSERT INTO Equipo (`nombre`,`codDueño`) VALUES (?,?)";
+                st = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                System.out.println(equipo.getNombre());
+                System.out.println(equipo.getDuenyo1().getCodDuenyo());
+                st.setString(1, equipo.getNombre());
+                st.setInt(2, equipo.getDuenyo1().getCodDuenyo());
+                //System.out.println(equipo.getDuenyo1().getCodDuenyo());
+            } else {
+                sql = "UPDATE Equipo SET nombre=?,codDueño=?" +
+                        "WHERE codEquipo =" + equipo.getCodEquipo();
 
+                st = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                st.setString(1, equipo.getNombre());
+                st.setInt(2, equipo.getDueño());
+
+            }
+            int filasAfectadas = st.executeUpdate();
+            if (equipo.getCodEquipo() == -1 && filasAfectadas > 0) {
+                ResultSet rs = st.getGeneratedKeys();
+                while (rs.next()) {
+                    equipo.setCodEquipo(rs.getInt(1));
+                }
+            }
+
+            st.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
-    } catch (SQLException ex) {
-        ex.printStackTrace();
+
+        GestorBD.desconectar();
+
     }
 
-    GestorBD.desconectar();
+    //SACAR TODOS LOS JUGADORES DE UN EQUIPO
+    public static List<Jugador> buscarEquipos(int codigo) {
 
-    return listaEquipos;
-}
+        Jugador JUGADOR = null;
+        List<Jugador> lista=new ArrayList<>();
+        Connection conexion = GestorBD.conectar();
+
+        try {
+
+            Statement st = conexion.createStatement();
+            String sql = "SELECT * FROM Jugador where Equipo_codEquipo =" + codigo;
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+
+              /*  JUGADOR = new Jugador(
+                        rs.getInt("codJugador"),
+                        rs.getString("Nombre"),
+                        rs.getString("Nick"),
+                        rs.getInt("Salario"),
+                        rs.getString("FechaAlta"),
+                        rs.getString("Posicion"),
+                        rs.getInt("Equipo_codEquipo")
+                );*/
+                lista.add(
+                        new Jugador(
+                        rs.getInt("codJugador"),
+                        rs.getString("Nombre"),
+                        rs.getString("Nick"),
+                        rs.getInt("Salario"),
+                        rs.getString("FechaAlta"),
+                        rs.getString("Posicion"),
+                        rs.getInt("Equipo_codEquipo")
+                ));
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+
+        }
+
+        GestorBD.desconectar();
+
+        return lista;
+    }
+
+    //METODOS IZARO
+// DEVUELVE LOS EQUIPOS QUE TIENE EL DUEÑO
+    public static List<Equipo> equipos1(int codDuenyo) {
+
+        List<Equipo> listaEquipos = new ArrayList<>();
+
+        Connection conexion = GestorBD.conectar();
+
+        try {
+            Statement st = conexion.createStatement();
+            String sql = "SELECT * FROM Equipo WHERE Dueño_codDueño = " + codDuenyo;
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+
+                listaEquipos.add(
+                        new Equipo(
+                                rs.getInt("codEquipo"),
+                                rs.getString("nombre"),
+                                rs.getInt("anyoFundacion"),
+                                rs.getInt("Dueño_codDueño")
+                        )
+                );
+
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        GestorBD.desconectar();
+
+        return listaEquipos;
+    }
+
     // DEVUELVE LAS PROPIEDADES DEL EQUIPO SELECCIONADO EN PANTALLADUENYO1
     public static Equipo equipo(int codDuenyo, String nombreEquipo) {
 
@@ -108,7 +203,7 @@ public static List<Equipo> equipos1(int codDuenyo) {
 
     public boolean buscarEquipo(int codEquipo) {
         Connection conexion = GestorBD.conectar();
-        boolean estado=true;
+        boolean estado = true;
 
         try {
 
@@ -116,11 +211,10 @@ public static List<Equipo> equipos1(int codDuenyo) {
             String sql = "select * from Equipo where codEquipo=" + codEquipo;
             ResultSet rs = st.executeQuery(sql);
 
-            if(rs.next()){
-                estado=true;
-            }
-            else{
-                estado= false;
+            if (rs.next()) {
+                estado = true;
+            } else {
+                estado = false;
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

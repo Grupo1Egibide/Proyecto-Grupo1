@@ -1,6 +1,8 @@
 package grupo1.egibide;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class AdministrarEquipo {
     private JPanel panel2;
@@ -18,5 +20,31 @@ public class AdministrarEquipo {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+        crearEquipoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //IR a Nuevo equipo
+                NuevoEquipo pantalacrearequipo=new NuevoEquipo();
+            }
+        });
+
+        verEquiposButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { //IR a VER EQUIPOS
+                VerEquipo pantallavereuqipos=new VerEquipo();
+            }
+        });
+        actualizarEquipoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { //IR a ACTUALIZAR EQUIPOS
+
+            }
+        });
+        eliminarEquipoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { //IR a ELIMINAR EQUIPOS
+
+            }
+        });
     }
 }

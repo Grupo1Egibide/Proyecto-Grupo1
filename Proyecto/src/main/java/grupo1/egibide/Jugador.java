@@ -28,17 +28,22 @@ public class Jugador extends Persona {
         this.posicion = posicion;
         this.equipo = equipo;
     }
-//dwd
-    public Jugador(int codJugador, String dni, String nombre, String fechaNac, int edad, String poblacion, String nick, int salario, String fechaAlta, String posicion, Equipo equipo) {
-    this.codJugador=codJugador; //el jugador existe
-    this.codJugador=getCodJugador();
-    this.nick = nick;
-    this.salario = salario;
-    this.fechaAlta = fechaAlta;
-    this.posicion = posicion;
-    this.equipo = equipo;
-}
-    public Jugador(String dni, String nombre, String fechaNac, int edad, String poblacion, String nick, int salario, String fechaAlta, String posicion, Equipo equipo) {
+    //EL JUGADOR EXISTE
+   public Jugador(int codJugador, String dni, String nombre, String fechaNac, int edad, String poblacion, String nick,
+                   int salario, String fechaAlta, String posicion, Equipo equipo) {
+        this.codJugador=codJugador; //el jugador existe
+        // this.codJugador=getCodJugador();
+        this.nick = nick;
+        this.salario = salario;
+        this.fechaAlta = fechaAlta;
+        this.posicion = posicion;
+        this.equipo=equipo;
+    }
+
+
+    //EL JUGADOR NO EXISTE
+    public Jugador(String dni, String nombre, String fechaNac, int edad, String poblacion, String nick, int salario,
+                   String fechaAlta, String posicion, Equipo equipo) {
         this.codJugador=-1; //el jugador NO existe
         this.nick = nick;
         this.salario = salario;
@@ -51,7 +56,8 @@ public class Jugador extends Persona {
         this.nombre = nombre;
     }
 
-    public Jugador(int codJugador, String nombre, String nick, int salario, String fechaAlta, String posicion, int equipo_codEquipo) { //existe y le pasamos el codigo del jugador
+    public Jugador(int codJugador, String nombre, String nick, int salario, String fechaAlta, String posicion,
+                   int equipo_codEquipo) { //existe y le pasamos el codigo del jugador
         this.nombre = nombre;
         this.codJugador = codJugador;
         this.nick = nick;
