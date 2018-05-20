@@ -68,5 +68,11 @@ public class PantallaAdmin1 {
                 AdministrarDuenyo pantalladuenyo=new AdministrarDuenyo();
             }
         });
+        botonUsuario.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                AdministarUsuario pantallausuario=new AdministarUsuario();
+            }
+        });
     }
 }

@@ -22,7 +22,7 @@ public class NuevoDuenyo {
         crearButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Creamos el objeto de tipo equipo con los datos
+                //Creamos el objeto de tipo DUEÑO con los datos
                 Duenyo crearDuenyo=new Duenyo(nombre.getText());
 
                 //Guardamos en la BBD
