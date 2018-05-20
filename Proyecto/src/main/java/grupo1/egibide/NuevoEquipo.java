@@ -10,8 +10,8 @@ public class NuevoEquipo {
     private JTextField nombre;
     private JTextField duenyo;
     private JButton crearButton;
-    private List<Equipo> equipos=EquipoBD.equipos();
-    private List<Duenyo> duenyos=DuenyoBD.duenyos();
+    private List<Equipo> equipos = EquipoBD.equipos();
+    private List<Duenyo> duenyos = DuenyoBD.duenyos();
 
 
     public NuevoEquipo() {
@@ -27,9 +27,9 @@ public class NuevoEquipo {
                 //al pulsar crear
 
                 Duenyo duenyoEncontrado;
-                int codDuenyo=Integer.parseInt(duenyo.getText()); //convertirlo a int
+                int codDuenyo = Integer.parseInt(duenyo.getText()); //convertirlo a int
 
-                    //Buscar si el dueño existe
+                //Buscar si el dueño existe
                 int i = 0;
                 while (i < duenyos.size() && duenyos.get(i).getCodDuenyo() != codDuenyo) {
                     i++;
@@ -42,12 +42,12 @@ public class NuevoEquipo {
                 }
                 System.out.println(duenyoEncontrado.getCodDuenyo());
                 //Creamos el objeto de tipo equipo con los datos
-                Equipo crearEquipo=new Equipo(nombre.getText(),duenyoEncontrado);
-
+                Equipo crearEquipo = new Equipo(nombre.getText(), duenyoEncontrado);
+                equipos = EquipoBD.equipos();
                 //Guardamos en la BBD
-                EquipoBD.guardar(crearEquipo);
+
                 //Actualizamos
-                equipos=EquipoBD.equipos();
+                equipos = EquipoBD.equipos();
 
             }
         });
