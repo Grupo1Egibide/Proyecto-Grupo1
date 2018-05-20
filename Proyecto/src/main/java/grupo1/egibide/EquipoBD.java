@@ -65,14 +65,48 @@ public class EquipoBD {
                 st.setInt(2, equipo.getDuenyo1().getCodDuenyo());
                 //System.out.println(equipo.getDuenyo1().getCodDuenyo());
             } else {
-                sql = "UPDATE Equipo SET nombre=?,codDueño=?" +
-                        "WHERE codEquipo =" + equipo.getCodEquipo();
+                sql = "UPDATE Equipo SET nombre=?,codDueño=? " +
+                        "WHERE codEquipo=" + equipo.getCodEquipo();
 
                 st = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 st.setString(1, equipo.getNombre());
-                st.setInt(2, equipo.getDueño());
+                //System.out.println(equipo.getDuenyo1().getCodDuenyo());
+                st.setInt(2, equipo.getDuenyo1().getCodDuenyo());
+                // st.setInt(2, equipo.getDuenyo1().getCodDuenyo());
 
             }
+            int filasAfectadas = st.executeUpdate();
+            if (equipo.getCodEquipo() == -1 && filasAfectadas > 0) {
+                ResultSet rs = st.getGeneratedKeys();
+                while (rs.next()) {
+                    equipo.setCodEquipo(rs.getInt(1));
+                }
+            }
+
+            st.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        GestorBD.desconectar();
+
+    }
+
+    //ELIMINAR
+    public static void eliminar(Equipo equipo) {
+
+        Connection conexion = GestorBD.conectar();
+
+        try {
+
+            String sql;
+            java.sql.PreparedStatement st;
+
+            sql = "DELETE FROM Equipo WHERE codEquipo=" + equipo.getCodEquipo();
+
+            st = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
             int filasAfectadas = st.executeUpdate();
             if (equipo.getCodEquipo() == -1 && filasAfectadas > 0) {
                 ResultSet rs = st.getGeneratedKeys();
@@ -95,7 +129,7 @@ public class EquipoBD {
     public static List<Jugador> buscarEquipos(int codigo) {
 
         Jugador JUGADOR = null;
-        List<Jugador> lista=new ArrayList<>();
+        List<Jugador> lista = new ArrayList<>();
         Connection conexion = GestorBD.conectar();
 
         try {
@@ -117,14 +151,14 @@ public class EquipoBD {
                 );*/
                 lista.add(
                         new Jugador(
-                        rs.getInt("codJugador"),
-                        rs.getString("Nombre"),
-                        rs.getString("Nick"),
-                        rs.getInt("Salario"),
-                        rs.getString("FechaAlta"),
-                        rs.getString("Posicion"),
-                        rs.getInt("Equipo_codEquipo")
-                ));
+                                rs.getInt("codJugador"),
+                                rs.getString("Nombre"),
+                                rs.getString("Nick"),
+                                rs.getInt("Salario"),
+                                rs.getString("FechaAlta"),
+                                rs.getString("Posicion"),
+                                rs.getInt("Equipo_codEquipo")
+                        ));
             }
 
         } catch (SQLException ex) {

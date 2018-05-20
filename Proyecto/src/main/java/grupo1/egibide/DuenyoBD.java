@@ -43,6 +43,118 @@ public class DuenyoBD {
 
 
     }
+
+    //Guardamos un nuevo dueño
+    public static void guardar(Duenyo duenyo) {
+
+        Connection conexion = GestorBD.conectar();
+
+        try {
+
+            String sql;
+            java.sql.PreparedStatement st;
+
+            if (duenyo.getCodDuenyo() == -1) {
+                sql = "INSERT INTO Dueño (`nombre`) " +
+                        "VALUES (?)";
+                st = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+                //st.setString(1, jugador.getDni());
+                st.setString(1, duenyo.getNombre());
+
+            } else {
+                sql = "UPDATE Dueño SET nombre=? " +
+                        "WHERE codDueño =" + duenyo.getCodDuenyo();
+
+                /* System.out.println(jugador.getNick());*/
+                st = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                st.setString(1, duenyo.getNombre());
+
+
+            }
+            int filasAfectadas = st.executeUpdate();
+            if (duenyo.getCodDuenyo() == -1 && filasAfectadas > 0) {
+                ResultSet rs = st.getGeneratedKeys();
+                while (rs.next()) {
+                    duenyo.setCodDuenyo(rs.getInt(1));
+                }
+            }
+
+            st.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        GestorBD.desconectar();
+
+    }
+
+    //ELIMINAR
+    public static void eliminar(Duenyo duenyo) {
+
+        Connection conexion = GestorBD.conectar();
+
+        try {
+
+            String sql;
+            java.sql.PreparedStatement st;
+
+            sql = "DELETE FROM Dueño WHERE codDueño=" + duenyo.getCodDuenyo();
+
+            st = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            int filasAfectadas = st.executeUpdate();
+            if (duenyo.getCodDuenyo() == -1 && filasAfectadas > 0) {
+                ResultSet rs = st.getGeneratedKeys();
+                while (rs.next()) {
+                    duenyo.setCodDuenyo(rs.getInt(1));
+                }
+            }
+
+            st.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        GestorBD.desconectar();
+
+    }
+
+
+    //VER TODOS LOS EQUIPOS DE UN DUEÑO
+    public static List<Equipo> buscarEquiposDuenyo(int codigo) {
+
+        Equipo Equipo = null;
+        List<Equipo> lista = new ArrayList<>();
+        Connection conexion = GestorBD.conectar();
+
+        try {
+
+            Statement st = conexion.createStatement();
+            String sql = "SELECT * FROM Equipo where codDueño =" + codigo;
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+
+                lista.add(
+                        new Equipo(
+                                rs.getInt("codEquipo"),
+                                rs.getString("Nombre")
+                        ));
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+
+        }
+
+        GestorBD.desconectar();
+
+        return lista;
+    }
+
     // Para saber el código del dueño
     public static Duenyo duenyo(String nombre) {
         Duenyo duenyo = null;
@@ -53,15 +165,15 @@ public class DuenyoBD {
         try {
 
             Statement st = conexion.createStatement();
-            String sql = "SELECT * FROM Dueño where Cuenta_nombre = '" + nombre +"'";
+            String sql = "SELECT * FROM Dueño where Cuenta_nombre = '" + nombre + "'";
             ResultSet rs = st.executeQuery(sql);
 
             if (rs.next()) {
 
                 duenyo = new Duenyo(
-                                rs.getInt("codDueño"),
-                                rs.getString("Nombre")
-                        );
+                        rs.getInt("codDueño"),
+                        rs.getString("Nombre")
+                );
             }
 
         } catch (SQLException ex) {

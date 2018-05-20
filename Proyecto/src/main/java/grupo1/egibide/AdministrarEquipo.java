@@ -17,7 +17,7 @@ public class AdministrarEquipo {
     public AdministrarEquipo() {
         JFrame frame = new JFrame("AdministrarEquipo");
         frame.setContentPane(panel2);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
         crearEquipoButton.addActionListener(new ActionListener() {
@@ -37,13 +37,13 @@ public class AdministrarEquipo {
         actualizarEquipoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) { //IR a ACTUALIZAR EQUIPOS
-
+                ActualizarEquipo pantallaactualizarequipo=new ActualizarEquipo();
             }
         });
         eliminarEquipoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) { //IR a ELIMINAR EQUIPOS
-
+                EliminarEquipo pantallaborrarequipo=new EliminarEquipo();
             }
         });
     }

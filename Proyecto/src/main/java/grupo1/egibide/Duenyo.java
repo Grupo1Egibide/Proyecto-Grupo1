@@ -11,6 +11,10 @@ public class Duenyo extends Persona {
         this.nombre = nombre;
     }
 
+    public Duenyo(String nombre) {
+        this.codDuenyo=-1;
+        this.nombre = nombre;
+    }
     /*
     public Duenyo(String dni, String nombre, String fechaNac, int edad, String poblacion, int codDuenyo, String nombre1, Cuenta cuenta) {
         super(dni, nombre, fechaNac, edad, poblacion);
