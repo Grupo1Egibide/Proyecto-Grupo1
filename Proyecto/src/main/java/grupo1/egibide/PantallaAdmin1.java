@@ -55,5 +55,24 @@ public class PantallaAdmin1 {
                 AdministarUsuario pantallaUsuario=new AdministarUsuario();
             }
         });
+        botonEquipo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //CRUD EQUIPOS
+                AdministrarEquipo pantallacrudequipo=new AdministrarEquipo();
+            }
+        });
+        botonDuenyo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AdministrarDuenyo pantalladuenyo=new AdministrarDuenyo();
+            }
+        });
+        botonUsuario.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                AdministarUsuario pantallausuario=new AdministarUsuario();
+            }
+        });
     }
 }

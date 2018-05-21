@@ -23,26 +23,26 @@ public class AdministrarJugadores {
         creaJugadorButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                NuevoJugador pantallaCrearJugador=new NuevoJugador();
+                NuevoJugador pantallaCrearJugador = new NuevoJugador();
 
             }
         });
         verJugadoresButton.addActionListener(new ActionListener() { //ver jugadores
             @Override
             public void actionPerformed(ActionEvent e) {
-                VerJugador verjugadores=new VerJugador();
+                VerJugador verjugadores = new VerJugador();
             }
         });
         actualizarJugadorButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ActualizarJugador pantallaActualizarJugador=new ActualizarJugador();
+                ActualizarJugador pantallaActualizarJugador = new ActualizarJugador();
             }
         });
         eliminarJugadorButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) { //Eliminar
-                EliminarJugador pantallaborrarjugador=new EliminarJugador();
+                EliminarJugador pantallaborrarjugador = new EliminarJugador();
             }
         });
     }

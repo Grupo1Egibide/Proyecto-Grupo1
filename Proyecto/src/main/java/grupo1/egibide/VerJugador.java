@@ -1,6 +1,7 @@
 package grupo1.egibide;
 
 
+import grupo1.egibide.modelo.TablaEquiposModel;
 import grupo1.egibide.modelo.TablaJugadoresModel;
 
 import javax.swing.*;
@@ -12,6 +13,7 @@ public class VerJugador {
     private JScrollPane panelJugadores;
     private JButton enviarButton;
     private List<Jugador> jugadores;
+    private List<Equipo> equipos;
     private JTable tabla;
 
     public VerJugador() {
@@ -27,7 +29,7 @@ public class VerJugador {
 
         //tabla vacia
         tabla = new JTable();
-        tabla.setModel(new TablaJugadoresModel()); //asociar con el modelo
+        tabla.setModel(new TablaEquiposModel()); //asociar con el modelo
 
         panelJugadores.setViewportView(tabla);
 

@@ -4,6 +4,22 @@ public class Cuenta {
     private String nombre;
     private String contrasenya;
     private int tipoCuenta;
+    private int codCuenta;
+
+    public Cuenta(int codCuenta, String nombre, String contrasenya, int tipoCuenta) {
+        this.codCuenta = codCuenta;
+        this.nombre = nombre;
+        this.contrasenya = contrasenya;
+        this.tipoCuenta = tipoCuenta;
+    }
+
+    public int getCodCuenta() {
+        return codCuenta;
+    }
+
+    public void setCodCuenta(int codCuenta) {
+        this.codCuenta = codCuenta;
+    }
 
     public String getNombre() {
         return nombre;
@@ -30,6 +46,7 @@ public class Cuenta {
     }
 
     public Cuenta(String nombre, String contrasenya, int tipoCuenta) {
+        this.codCuenta = -1;
         this.nombre = nombre;
         this.contrasenya = contrasenya;
         this.tipoCuenta = tipoCuenta;

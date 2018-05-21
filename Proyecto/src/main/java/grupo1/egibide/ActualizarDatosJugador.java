@@ -14,6 +14,12 @@ public class ActualizarDatosJugador {
     private JTextField codEquipo;
     private JButton ModificarButton;
     private JTextField posicion;
+    private JTextField dni;
+    private JTextField edad;
+    private JTextField poblacion;
+    private JTextField fechaNacimieto;
+    private JLabel error;
+    private JLabel error2;
     private List<Jugador> jugadores;
     private List<Equipo> equipos = EquipoBD.equipos();
 
@@ -24,8 +30,18 @@ public class ActualizarDatosJugador {
         frame.pack();
         frame.setVisible(true);
 
+        dni.setText("111");
+        nombre.setText("juan");
+        edad.setText("1500"); //le damos un valor en String
+        int edad2 = Integer.parseInt(edad.getText()); //lo convertimos a int
+        poblacion.setText("murcia");
+        fechaNacimieto.setText("01-03-97");
+
         String salario1 = Integer.toString(jugador.getSalario());
-        String codEquipo1 = Integer.toString(jugador.getCodJugador());
+        //String codEquipo1 = Integer.toString(jugador.getEquipo().getCodEquipo());
+        System.out.println(jugador.getEquipo());
+
+        int codJugadorEncontrado;
 
         // Cargar los usuarios en la lista
         jugadores = JugadorBD.jugadores();
@@ -34,39 +50,55 @@ public class ActualizarDatosJugador {
         nick.setText(jugador.getNick());
         salario.setText(salario1);
         fechaAlta.setText(jugador.getFechaAlta());
-        codEquipo.setText(codEquipo1);
+        //codEquipo.setText(codEquipo1);
 
-        int codEquipo2 = Integer.parseInt(codEquipo.getText());
-        int salario2 = Integer.parseInt(salario.getText());
 
         ModificarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Al pulsar modificar
-                //Buscamos el equipo
-                Equipo equipoEncontrado;
-                int i = 0;
+                int codEquipo2 = Integer.parseInt(codEquipo.getText());
+                int salario2 = Integer.parseInt(salario.getText());
 
-                while (i < equipos.size() && equipos.get(i).getCodEquipo() != codEquipo2) {
-                    i++;
-                }
-                if (i < equipos.size()) {
-                    //encontrado
-                    equipoEncontrado = equipos.get(i);
+                if (Integer.parseInt(salario.getText()) > 736) { //RESTRICCION DEL SMI
+                    if (EquipoBD.contarJugador(codEquipo2) < 6) { //RESTRICCION DE MAX. 6 Jugadores en equipo
+                        //Buscamos el equipo
+                        Equipo equipoEncontrado;
+                        int i = 0;
+
+                        while (i < equipos.size() && equipos.get(i).getCodEquipo() != codEquipo2) {
+                            i++;
+                        }
+                        if (i < equipos.size()) {
+                            //encontrado
+                            equipoEncontrado = equipos.get(i);
+                        } else {
+                            equipoEncontrado = null;
+                        }
+
+                        //Creamos el objeto tipo Jugador con los datos
+               /* Jugador crearJugador = new Jugador(dni, nombre, fechaNacimiento, edad1, poblacion,
+                        nick.getText(), salario2, fechaAlta.getText(), posicion.getText(),
+                        equipoEncontrado);*/
+                        Jugador crearJugador = new Jugador(jugador.getCodJugador(), dni.getText(), nombre.getText(), fechaNacimieto.getText(), edad2,
+                                poblacion.getText(), nick.getText(), Integer.parseInt(salario.getText()), fechaAlta.getText(),
+                                posicion.getText(), equipoEncontrado);
+
+                        //Lo guardamos en la BBDD
+                        JugadorBD.guardar(crearJugador);
+
+                        //Actualizamos la clase con la BBDD
+                        jugadores = JugadorBD.jugadores();
+                    } else {
+                        error2.setText("No puede haber más de 6 jugadores en un equipo");
+                    }
                 } else {
-                    equipoEncontrado = null;
+                    error.setText("El salario debe ser mayor que el SMI");
                 }
-
-                //Creamos el objeto tipo Jugador con los datos
-           /*   Jugador crearJugador = new Jugador(nick.getText(), salario2, fechaAlta.getText(),
-                        posicion.getText(), equipoEncontrado);*/
-                //Lo guardamos en la BBDD
-                // JugadorBD.guardar(crearJugador);
-
-                //Actualizamos la clase con la BBDDjugadores = JugadorBD.jugadores();
-
             }
         });
     }
 
 }
+
+

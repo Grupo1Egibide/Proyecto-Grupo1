@@ -1,7 +1,6 @@
 package grupo1.egibide;
 
 
-
 import java.sql.*;
 
 import java.util.ArrayList;
@@ -48,45 +47,46 @@ public class JugadorBD {
 
 
     }
-// METODO IZARO
-public static List<Jugador> jugadores1(int codEquipo) {
 
-    // Lista para dejar los objetos
-    List<Jugador> listaJugadores = new ArrayList<>();
+    // METODO IZARO
+    public static List<Jugador> jugadores1(int codEquipo) {
 
-    // Conexión a la BD
-    Connection conexion = GestorBD.conectar();
+        // Lista para dejar los objetos
+        List<Jugador> listaJugadores = new ArrayList<>();
 
-    try {
+        // Conexión a la BD
+        Connection conexion = GestorBD.conectar();
 
-        Statement st = conexion.createStatement();
-        String sql = "SELECT * FROM JugadorWHERE Equipo_codEquipo = " + codEquipo;
-        ResultSet rs = st.executeQuery(sql);
+        try {
 
-        while (rs.next()) {
+            Statement st = conexion.createStatement();
+            String sql = "SELECT * FROM Jugador WHERE Equipo_codEquipo = " + codEquipo;
+            ResultSet rs = st.executeQuery(sql);
 
-            listaJugadores.add(
-                    new Jugador(
-                            rs.getInt("codJugador"),
-                            rs.getString("nombre"),
-                            rs.getString("nick"),
-                            rs.getInt("salario"),
-                            rs.getString("fechaAlta"),
-                            rs.getString("posicion")
-                    )
-            );
+            while (rs.next()) {
+
+                listaJugadores.add(
+                        new Jugador(
+                                rs.getInt("codJugador"),
+                                rs.getString("nombre"),
+                                rs.getString("nick"),
+                                rs.getInt("salario"),
+                                rs.getString("fechaAlta"),
+                                rs.getString("posicion")
+                        )
+                );
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
 
-    } catch (SQLException ex) {
-        ex.printStackTrace();
+        GestorBD.desconectar();
+
+        return listaJugadores;
+
+
     }
-
-    GestorBD.desconectar();
-
-    return listaJugadores;
-
-
-}
 
     //BUSCAR UN JUGADOR DETERMINADO
     public static Jugador buscarJugador(int codigo) {
@@ -123,6 +123,7 @@ public static List<Jugador> jugadores1(int codEquipo) {
         return JUGADOR;
     }
 
+
     //Guardamos un nuevo jugador
     public static void guardar(Jugador jugador) {
 
@@ -153,11 +154,56 @@ public static List<Jugador> jugadores1(int codEquipo) {
                         "WHERE codJugador =" + jugador.getCodJugador();
 
                 st = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                st.setString(1, jugador.getNombre());
+                st.setString(2, jugador.getNick());
+                st.setInt(3, jugador.getSalario());
                 st.setString(4, jugador.getFechaAlta());
                 st.setInt(5, jugador.getEquipo().getCodEquipo());
                 st.setString(6, jugador.getPosicion());
 
             }
+            int filasAfectadas = st.executeUpdate();
+            if (jugador.getCodJugador() == -1 && filasAfectadas > 0) {
+                ResultSet rs = st.getGeneratedKeys();
+                while (rs.next()) {
+                    jugador.setCodJugador(rs.getInt(1));
+                }
+            }
+
+            st.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        GestorBD.desconectar();
+
+    }
+
+    //ELIMINAR UN JUGADOR
+    public static void eliminar(Jugador jugador) {
+
+        Connection conexion = GestorBD.conectar();
+
+        try {
+
+            String sql;
+            java.sql.PreparedStatement st;
+
+            sql = "DELETE FROM Jugador WHERE codJugador=" + jugador.getCodJugador();
+            st = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+/*
+            //st.setString(1, jugador.getDni());
+            st.setString(1, jugador.getNombre());
+            //  st.setString(3, jugador.getFechaNac());
+            // st.setInt(4, jugador.getEdad());
+            //  st.setString(5, jugador.getPoblacion());
+            st.setString(2, jugador.getNick());
+            st.setInt(3, jugador.getSalario());
+            st.setString(4, jugador.getFechaAlta());
+            st.setInt(5, jugador.getEquipo().getCodEquipo());
+            st.setString(6, jugador.getPosicion());*/
+
             int filasAfectadas = st.executeUpdate();
             if (jugador.getCodJugador() == -1 && filasAfectadas > 0) {
                 ResultSet rs = st.getGeneratedKeys();

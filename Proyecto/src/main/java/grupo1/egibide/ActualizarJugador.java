@@ -21,6 +21,7 @@ public class ActualizarJugador {
         jugadores = JugadorBD.jugadores();
         actualizarListaViajes();
 
+
         listaJugadores.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) { //Al seleccionar un usuario de la lista

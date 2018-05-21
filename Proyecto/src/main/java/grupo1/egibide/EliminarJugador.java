@@ -32,6 +32,7 @@ public class EliminarJugador {
                         ((Jugador) listaJugadores.getSelectedValue()); *///convertir de tipo Jugador a tipo objeto
                 // para pasarle el paratmetro
 
+
             }
         });
         listaJugadores.addListSelectionListener(new ListSelectionListener() {
@@ -40,13 +41,18 @@ public class EliminarJugador {
                 eliminarButton.setEnabled(true);
             }
         });
-        eliminarButton.addActionListener(new ActionListener() {
+        eliminarButton.addActionListener(new ActionListener() { //Al PULSAR ELIMINAR
             @Override
             public void actionPerformed(ActionEvent e) {
+                Jugador jugadorseleccionado = (Jugador) listaJugadores.getSelectedValue();
+                //System.out.println(jugadorseleccionado.getCodJugador());
 
+                JugadorBD.eliminar(jugadorseleccionado); //Lo borramos de la BBDD
+                actualizarListaViajes();
+                //Actualizamos la clase con los nuevos datos
+                JugadorBD.jugadores();
             }
         });
-
     }
 
     private void actualizarListaViajes() {
