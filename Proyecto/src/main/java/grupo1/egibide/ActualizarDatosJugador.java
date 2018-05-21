@@ -38,8 +38,8 @@ public class ActualizarDatosJugador {
         fechaNacimieto.setText("01-03-97");
 
         String salario1 = Integer.toString(jugador.getSalario());
-        String codEquipo1 = Integer.toString(jugador.getCodJugador());
-
+        //String codEquipo1 = Integer.toString(jugador.getEquipo().getCodEquipo());
+        System.out.println(jugador.getEquipo());
 
         int codJugadorEncontrado;
 
@@ -50,7 +50,7 @@ public class ActualizarDatosJugador {
         nick.setText(jugador.getNick());
         salario.setText(salario1);
         fechaAlta.setText(jugador.getFechaAlta());
-        codEquipo.setText(codEquipo1);
+        //codEquipo.setText(codEquipo1);
 
 
         ModificarButton.addActionListener(new ActionListener() {

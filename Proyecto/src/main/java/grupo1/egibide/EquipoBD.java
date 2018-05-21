@@ -126,22 +126,21 @@ public class EquipoBD {
     }
 //CONTAR LOS JUGADORES QUE HAY EN UN EQUIPO
 
-public static int contarJugador(int codEquipo) {
+    public static int contarJugador(int codEquipo) {
 
 
+        Connection conexion = GestorBD.conectar();
+        int contar = 0;
+        try {
 
-    Connection conexion = GestorBD.conectar();
-    int contar=0;
-    try {
+            Statement st = conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            //String sql = "SELECT COUNT(*) FROM Jugador Where Equipo_codEquipo="+codEquipo;
+            String sql = "SELECT * FROM Jugador Where Equipo_codEquipo=" + codEquipo;
+            ResultSet rs = st.executeQuery(sql);
+            rs.last();
+            contar = rs.getRow();
 
-        Statement st = conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-        //String sql = "SELECT COUNT(*) FROM Jugador Where Equipo_codEquipo="+codEquipo;
-        String sql = "SELECT * FROM Jugador Where Equipo_codEquipo="+codEquipo;
-        ResultSet rs = st.executeQuery(sql);
-        rs.last();
-        contar=rs.getRow();
-
-       // System.out.println(contar);
+            // System.out.println(contar);
        /* if (rs.next()) {
 
             JUGADOR = new Jugador(
@@ -155,14 +154,14 @@ public static int contarJugador(int codEquipo) {
             );
         }*/
 
-    } catch (SQLException ex) {
-        ex.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        GestorBD.desconectar();
+
+        return contar;
     }
-
-    GestorBD.desconectar();
-
-    return contar;
-}
 
     //SACAR TODOS LOS JUGADORES DE UN EQUIPO
     public static List<Jugador> buscarEquipos(int codigo) {

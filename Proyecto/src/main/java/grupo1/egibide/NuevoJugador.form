@@ -116,7 +116,9 @@
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <enabled value="true"/>
           <text value="DNI:"/>
+          <visible value="false"/>
         </properties>
       </component>
       <component id="62cdb" class="javax.swing.JTextField" binding="dni">
@@ -126,7 +128,8 @@
           </grid>
         </constraints>
         <properties>
-          <visible value="true"/>
+          <enabled value="true"/>
+          <visible value="false"/>
         </properties>
       </component>
       <component id="71b95" class="javax.swing.JLabel">
@@ -134,7 +137,9 @@
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <enabled value="true"/>
           <text value="Fecha Nacimiento:"/>
+          <visible value="false"/>
         </properties>
       </component>
       <component id="96df5" class="javax.swing.JLabel">
@@ -142,7 +147,9 @@
           <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <enabled value="true"/>
           <text value="Edad:"/>
+          <visible value="false"/>
         </properties>
       </component>
       <component id="b144a" class="javax.swing.JTextField" binding="edad">
@@ -151,14 +158,19 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <enabled value="true"/>
+          <visible value="false"/>
+        </properties>
       </component>
       <component id="2327b" class="javax.swing.JLabel">
         <constraints>
           <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <enabled value="true"/>
           <text value="Población:"/>
+          <visible value="false"/>
         </properties>
       </component>
       <component id="f0920" class="javax.swing.JTextField" binding="poblacion">
@@ -167,7 +179,10 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <enabled value="true"/>
+          <visible value="false"/>
+        </properties>
       </component>
       <component id="f140c" class="javax.swing.JLabel">
         <constraints>
@@ -191,7 +206,18 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <enabled value="true"/>
+          <visible value="false"/>
+        </properties>
+      </component>
+      <component id="e1e6c" class="javax.swing.JLabel" binding="error">
+        <constraints>
+          <grid row="11" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value=""/>
+        </properties>
       </component>
     </children>
   </grid>
