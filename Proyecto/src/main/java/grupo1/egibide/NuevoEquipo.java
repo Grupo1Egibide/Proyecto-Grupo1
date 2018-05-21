@@ -17,7 +17,7 @@ public class NuevoEquipo {
     public NuevoEquipo() {
         JFrame frame = new JFrame("NuevoEquipo");
         frame.setContentPane(panel21);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
 

@@ -203,9 +203,7 @@ public class EquipoBD {
             ex.printStackTrace();
 
         }
-
-        GestorBD.desconectar();
-
+   GestorBD.desconectar();
         return lista;
     }
 
