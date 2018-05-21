@@ -5,6 +5,20 @@ import java.util.List;
 public class Duenyo extends Persona {
     private int codDuenyo;
     private String nombre;
+    private String contrasenya;
+
+    public String getContrasenya() {
+        return contrasenya;
+    }
+
+    public void setContrasenya(String contrasenya) {
+        this.contrasenya = contrasenya;
+    }
+
+    public Duenyo(String nombre, String contrasenya) {
+        this.nombre = nombre;
+        this.contrasenya = contrasenya;
+    }
 
     public Duenyo(int codDuenyo, String nombre) {
         this.codDuenyo = codDuenyo;

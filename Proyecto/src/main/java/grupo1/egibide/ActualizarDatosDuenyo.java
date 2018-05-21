@@ -10,7 +10,9 @@ public class ActualizarDatosDuenyo {
     private JPanel panel24;
     private JTextField nombre;
     private JButton modificarButton;
+    private JLabel contrasenya;
     private List<Duenyo> duenyos;
+    private List<Cuenta> cuentas;
 
     public ActualizarDatosDuenyo(Duenyo duenyo) {
         JFrame frame = new JFrame("ActualizarDatosDuenyo");
@@ -23,6 +25,7 @@ public class ActualizarDatosDuenyo {
         duenyos = DuenyoBD.duenyos();
         //Llenar el campo con los datos al principio
         nombre.setText(duenyo.getNombre());
+        contrasenya.setText("12345");
 
         modificarButton.addActionListener(new ActionListener() {
             @Override
@@ -34,6 +37,11 @@ public class ActualizarDatosDuenyo {
                 DuenyoBD.guardar(crearDuenyo);
                 //Actualizamos
                 duenyos = DuenyoBD.duenyos();
+
+                Cuenta crearcuenta = new Cuenta(nombre.getText(), contrasenya.getText(), 2);
+                CuentaBD.guardar(crearcuenta);
+                cuentas = CuentaBD.cuentas();
+
             }
         });
     }

@@ -33,7 +33,7 @@ public class PantallaConfeccionar {
     public PantallaConfeccionar(int codEquipo) {
         JFrame frame = new JFrame("PantallaConfeccionar");
         frame.setContentPane(panelConfeccionar);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
 
@@ -59,21 +59,30 @@ public class PantallaConfeccionar {
         listaEquipo.setModel(modelo2);
 
         // BOTÓN AGREGAR JUGADOR
+
+
+        // BOTÓN AGREGAR JUGADOR
         botonAgregar.addActionListener(new ActionListener() {
             @Override
 
             public void actionPerformed(ActionEvent e) {
-                // CASTING
-                Jugador jugSelec = (Jugador) listaJugadores.getSelectedValue();
-                modelo2.addElement(jugSelec);
+                // CONTROLAR QUE EL EQUIPO COMO MÁXIMO TENGA 6 JUGADORES
+                if (modelo2.size() >= 6) {
+                    JOptionPane.showMessageDialog(panelConfeccionar, "No puede haber más de 6 miembros en el equipo.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    // CASTING
+                    Jugador jugSelec = (Jugador) listaJugadores.getSelectedValue();
+                    modelo2.addElement(jugSelec);
 
-                modelo.remove(listaJugadores.getSelectedIndex());
+                    modelo.remove(listaJugadores.getSelectedIndex());
 
-                codJugDisponible = jugSelec.getCodJugador();
+                    codJugDisponible = jugSelec.getCodJugador();
 
+                    // ME ACTUALIZA EL JUGADOR PARA QUE TENGA EL CODIGO DEL EQUIPO
+                    JugadorBD.jugadorAdquirido(codJugDisponible, codEquipo);
 
-                // ME ACTUALIZA EL JUGADOR PARA QUE TENGA EL CODIGO DEL EQUIPO
-                JugadorBD.jugadorAdquirido(codJugDisponible, codEquipo);
+                }
+
 
             }
 
@@ -96,44 +105,33 @@ public class PantallaConfeccionar {
             }
         });
 
-        // BOTÓN GUARDAR EQUIPO (PRUEBAS)
+        // BOTÓN GUARDAR EQUIPO
         botonGuardar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                // MUESTRO LOS JUGADORES QUE YA TIENEN EN EL EQUIPO
-                for (int i = 0; i < modelo2.size(); i++) {
-                    System.out.println(modelo2.get(i).toString());
-
-                }
-
-                // CONTROLAR QUE EL EQUIPO COMO MÁXIMO TENGA 6 JUGADORES
-                // ESTO LO TENGO QUE CONTROLAR CUANDO LE DOY AL BOTÓN AGREGAR
-                if (modelo2.size() > 6) {
-                    System.out.println("No puede haber más de 6 miembros en el equipo.");
-                } else {
-                    System.out.println("Cantidad de los miembros del equipo: " + modelo2.size());
-                }
-
-
                 // CONTROLAR QUE EL SALARIO TOTAL DEL EQUIPO NO SEA SUPERIOR A 200.000 EUROS
                 int total = 0;
                 int salario = 0;
                 int salarioMax = 200000;
 
 
-                for (int i = 0; i < modelo2.size(); i++) {
-                    Jugador jugSalario = (Jugador) listaEquipo.getSelectedValue();
-                    salario = jugSalario.getSalario();
-
+                for (int i = 0; i < jugadoresEquipo.size(); i++) {
+                    salario = jugadoresEquipo.get(i).getSalario();
                     total = total + salario;
 
                 }
 
-                System.out.println(total);
+                if (total >= salarioMax) {
+                    JOptionPane.showMessageDialog(panelConfeccionar, "El salario máximo anual no podrá ser superior a 200.000 euros.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(panelConfeccionar, "Equipo guardado correctamente.", "GUARDADO CORRECTO", JOptionPane.INFORMATION_MESSAGE);
+                }
 
             }
         });
+
+
+        //aaa
 
     }
 

@@ -12,12 +12,6 @@ public class PantallaDuenyo1 {
     private JPanel panelMenuDuenyo;
     private JLabel tituloMenu1;
     private JPanel panelEquipo;
-    private JPanel panelResultados;
-    private JLabel menuResultados;
-    private JButton botonResultados;
-    private JPanel panelJugadores;
-    private JLabel menuEquipos;
-    private JButton botonJugadores;
     private JButton botonEquipos;
     private JLabel menuConfeccionar;
     private JComboBox comboBoxEquipo;
@@ -32,7 +26,7 @@ public class PantallaDuenyo1 {
         // VISUALIZAR LA VENTANA
         JFrame frame = new JFrame("PantallaDuenyo1");
         frame.setContentPane(panelMenuDuenyo);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
 

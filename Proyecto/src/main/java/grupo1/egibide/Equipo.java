@@ -85,6 +85,13 @@ public class Equipo {
 
 */
 
+    public Equipo(int codEquipo, String nombre, int duenyo) {
+
+        this.codEquipo = codEquipo;
+        this.nombre = nombre;
+        this.duenyo = duenyo;
+    }
+
     // GETTERS Y SETTERS
     public int getCodEquipo() {
         return codEquipo;
