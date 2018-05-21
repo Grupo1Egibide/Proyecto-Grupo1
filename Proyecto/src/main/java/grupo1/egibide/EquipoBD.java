@@ -65,7 +65,7 @@ public class EquipoBD {
                 st.setInt(2, equipo.getDuenyo1().getCodDuenyo());
                 //System.out.println(equipo.getDuenyo1().getCodDuenyo());
             } else {
-                sql = "UPDATE Equipo SET nombre=?,codDueño=? " +
+                sql = "UPDATE Equipo SET nombre=?,Dueño_codDueño=? " +
                         "WHERE codEquipo=" + equipo.getCodEquipo();
 
                 st = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -226,7 +226,6 @@ public class EquipoBD {
                         new Equipo(
                                 rs.getInt("codEquipo"),
                                 rs.getString("nombre"),
-                                rs.getInt("anyoFundacion"),
                                 rs.getInt("Dueño_codDueño")
                         )
                 );
@@ -257,7 +256,6 @@ public class EquipoBD {
                 equipo = new Equipo(
                         rs.getInt("codEquipo"),
                         rs.getString("nombre"),
-                        rs.getInt("anyoFundacion"),
                         rs.getInt("Dueño_codDueño")
                 );
             }

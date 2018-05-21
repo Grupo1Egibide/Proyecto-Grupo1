@@ -50,7 +50,7 @@ public class ActualizarDatosJugador {
         nick.setText(jugador.getNick());
         salario.setText(salario1);
         fechaAlta.setText(jugador.getFechaAlta());
-        //codEquipo.setText(codEquipo1);
+        codEquipo.setText(Integer.toString(jugador.getCodEquipo1()));
 
 
         ModificarButton.addActionListener(new ActionListener() {

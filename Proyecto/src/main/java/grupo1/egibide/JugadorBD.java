@@ -32,7 +32,8 @@ public class JugadorBD {
                                 rs.getString("nick"),
                                 rs.getInt("salario"),
                                 rs.getString("fechaAlta"),
-                                rs.getString("posicion")
+                                rs.getString("posicion"),
+                                rs.getInt("Equipo_codEquipo")
                         )
                 );
             }

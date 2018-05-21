@@ -89,6 +89,53 @@ public class DuenyoBD {
         GestorBD.desconectar();
 
     }
+//GUARDAR2
+public static void guardar2(Duenyo duenyo,String nombre) {
+
+    Connection conexion = GestorBD.conectar();
+
+    try {
+
+        String sql;
+        java.sql.PreparedStatement st;
+
+        if (duenyo.getCodDuenyo() == -1) {
+            sql = "INSERT INTO Dueño (`nombre`,`Cuenta_nombre`) " +
+                    "VALUES (?,?)";
+            st = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            //st.setString(1, jugador.getDni());
+            st.setString(1, duenyo.getNombre());
+            st.setString(2, nombre);
+
+        } else {
+            sql = "UPDATE Dueño SET nombre=? Cuenta_nombre=?" +
+                    "WHERE codDueño =" + duenyo.getCodDuenyo();
+
+            /* System.out.println(jugador.getNick());*/
+            st = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            st.setString(1, duenyo.getNombre());
+            st.setString(2, nombre);
+
+
+        }
+        int filasAfectadas = st.executeUpdate();
+        if (duenyo.getCodDuenyo() == -1 && filasAfectadas > 0) {
+            ResultSet rs = st.getGeneratedKeys();
+            while (rs.next()) {
+                duenyo.setCodDuenyo(rs.getInt(1));
+            }
+        }
+
+        st.close();
+
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+
+    GestorBD.desconectar();
+
+}
 
     //ELIMINAR
     public static void eliminar(Duenyo duenyo) {
@@ -133,7 +180,7 @@ public class DuenyoBD {
         try {
 
             Statement st = conexion.createStatement();
-            String sql = "SELECT * FROM Equipo where codDueño =" + codigo;
+            String sql = "SELECT * FROM Equipo where Dueño_codDueño =" + codigo;
             ResultSet rs = st.executeQuery(sql);
 
             while (rs.next()) {
@@ -165,7 +212,7 @@ public class DuenyoBD {
         try {
 
             Statement st = conexion.createStatement();
-            String sql = "SELECT * FROM Dueño where Cuenta_nombre = '" + nombre + "'";
+            String sql = "SELECT * FROM Dueño where Nombre = '" + nombre + "'";
             ResultSet rs = st.executeQuery(sql);
 
             if (rs.next()) {

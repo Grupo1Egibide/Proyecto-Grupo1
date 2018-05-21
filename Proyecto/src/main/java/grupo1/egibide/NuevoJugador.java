@@ -48,7 +48,12 @@ public class NuevoJugador {
                 int edad1 = Integer.parseInt(edad.getText());
                 //int codJugador1 = Integer.parseInt(codJugador.getText());
                 int salario1 = Integer.parseInt(salario.getText());
-                int codEquipo1 = Integer.parseInt(codEquipo.getText());
+                int codEquipo1 = -2;
+                try {
+                    codEquipo1 = Integer.parseInt(codEquipo.getText());
+                } catch (NumberFormatException e1) {
+
+                }
                 Equipo equipoEncontrado;
                 //Buscamos el equipo
                 //List<Equipo> prueba = new ArrayList<>();
@@ -68,8 +73,8 @@ public class NuevoJugador {
                 }
 
                 if (Integer.parseInt(salario.getText()) > 736) { //RESTRICCION DEL SMI
-                    if (EquipoBD.contarJugador(equipoEncontrado.getCodEquipo()) < 6) { //RESTRICCION DE MAX. 6 Jugadores en equipo
-                        if (JugadorBD.salarioTotal(equipoEncontrado.getCodEquipo()) < 200000) { //Restriccion del salario max.
+                    if (equipoEncontrado != null && EquipoBD.contarJugador(equipoEncontrado.getCodEquipo()) < 6) { //RESTRICCION DE MAX. 6 Jugadores en equipo
+                        if (equipoEncontrado != null && JugadorBD.salarioTotal(equipoEncontrado.getCodEquipo()) < 200000) { //Restriccion del salario max.
                             //Creamos el objeto tipo Jugador con los datos
                             Jugador crearJugador = new Jugador(dni.getText(), nombre.getText(), fechaNacimieto.getText(), edad1,
                                     poblacion.getText(), nick.getText(), salario1, fechaAlta.getText(),
