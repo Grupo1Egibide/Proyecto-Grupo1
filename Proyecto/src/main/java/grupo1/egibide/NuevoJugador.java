@@ -69,17 +69,21 @@ public class NuevoJugador {
 
                 if (Integer.parseInt(salario.getText()) > 736) { //RESTRICCION DEL SMI
                     if (EquipoBD.contarJugador(equipoEncontrado.getCodEquipo()) < 6) { //RESTRICCION DE MAX. 6 Jugadores en equipo
-                        //Creamos el objeto tipo Jugador con los datos
-                        Jugador crearJugador = new Jugador(dni.getText(), nombre.getText(), fechaNacimieto.getText(), edad1,
-                                poblacion.getText(), nick.getText(), salario1, fechaAlta.getText(),
-                                posicion.getText(), equipoEncontrado);
+                        if (JugadorBD.salarioTotal(equipoEncontrado.getCodEquipo()) < 200000) { //Restriccion del salario max.
+                            //Creamos el objeto tipo Jugador con los datos
+                            Jugador crearJugador = new Jugador(dni.getText(), nombre.getText(), fechaNacimieto.getText(), edad1,
+                                    poblacion.getText(), nick.getText(), salario1, fechaAlta.getText(),
+                                    posicion.getText(), equipoEncontrado);
 
-                        //Lo guardamos en la BBDD
-                        JugadorBD.guardar(crearJugador);
+                            //Lo guardamos en la BBDD
+                            JugadorBD.guardar(crearJugador);
 
-                        //Actualizamos la clase con la BBDD
-                        jugadores = JugadorBD.jugadores();
+                            //Actualizamos la clase con la BBDD
+                            jugadores = JugadorBD.jugadores();
 
+                        } else {
+                            error.setText("El salario del equipo no puede ser superior a 200.000€");
+                        }
                     } else {
                         error.setText("No puede haber más de 6 jugadores en un equipo");
                     }

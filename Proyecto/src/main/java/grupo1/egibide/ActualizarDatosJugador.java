@@ -39,7 +39,7 @@ public class ActualizarDatosJugador {
 
         String salario1 = Integer.toString(jugador.getSalario());
         //String codEquipo1 = Integer.toString(jugador.getEquipo().getCodEquipo());
-        System.out.println(jugador.getEquipo());
+        // System.out.println(jugador.getEquipo());
 
         int codJugadorEncontrado;
 
@@ -60,35 +60,40 @@ public class ActualizarDatosJugador {
                 int codEquipo2 = Integer.parseInt(codEquipo.getText());
                 int salario2 = Integer.parseInt(salario.getText());
 
+                //Buscamos el equipo
+                Equipo equipoEncontrado;
+                int i = 0;
+
+                while (i < equipos.size() && equipos.get(i).getCodEquipo() != codEquipo2) {
+                    i++;
+                }
+                if (i < equipos.size()) {
+                    //encontrado
+                    equipoEncontrado = equipos.get(i);
+                } else {
+                    equipoEncontrado = null;
+                }
+
                 if (Integer.parseInt(salario.getText()) > 736) { //RESTRICCION DEL SMI
                     if (EquipoBD.contarJugador(codEquipo2) < 6) { //RESTRICCION DE MAX. 6 Jugadores en equipo
-                        //Buscamos el equipo
-                        Equipo equipoEncontrado;
-                        int i = 0;
+                        if (JugadorBD.salarioTotal(codEquipo2) < 200000) { //Restriccion del salario max.
 
-                        while (i < equipos.size() && equipos.get(i).getCodEquipo() != codEquipo2) {
-                            i++;
-                        }
-                        if (i < equipos.size()) {
-                            //encontrado
-                            equipoEncontrado = equipos.get(i);
-                        } else {
-                            equipoEncontrado = null;
-                        }
-
-                        //Creamos el objeto tipo Jugador con los datos
-               /* Jugador crearJugador = new Jugador(dni, nombre, fechaNacimiento, edad1, poblacion,
+                            //Creamos el objeto tipo Jugador con los datos
+                          /* Jugador crearJugador = new Jugador(dni, nombre, fechaNacimiento, edad1, poblacion,
                         nick.getText(), salario2, fechaAlta.getText(), posicion.getText(),
                         equipoEncontrado);*/
-                        Jugador crearJugador = new Jugador(jugador.getCodJugador(), dni.getText(), nombre.getText(), fechaNacimieto.getText(), edad2,
-                                poblacion.getText(), nick.getText(), Integer.parseInt(salario.getText()), fechaAlta.getText(),
-                                posicion.getText(), equipoEncontrado);
+                            Jugador crearJugador = new Jugador(jugador.getCodJugador(), dni.getText(), nombre.getText(), fechaNacimieto.getText(), edad2,
+                                    poblacion.getText(), nick.getText(), Integer.parseInt(salario.getText()), fechaAlta.getText(),
+                                    posicion.getText(), equipoEncontrado);
 
-                        //Lo guardamos en la BBDD
-                        JugadorBD.guardar(crearJugador);
+                            //Lo guardamos en la BBDD
+                            JugadorBD.guardar(crearJugador);
 
-                        //Actualizamos la clase con la BBDD
-                        jugadores = JugadorBD.jugadores();
+                            //Actualizamos la clase con la BBDD
+                            jugadores = JugadorBD.jugadores();
+                        } else {
+                            error.setText("El salario del equipo no puede ser superior a 200.000€");
+                        }
                     } else {
                         error2.setText("No puede haber más de 6 jugadores en un equipo");
                     }

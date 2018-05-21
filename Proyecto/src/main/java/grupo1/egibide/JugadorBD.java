@@ -222,6 +222,26 @@ public class JugadorBD {
 
     }
 
+    //SALARIO TOTAL DE UN EQUIPO
+    public static int salarioTotal(int codEquipo) {
+
+        Connection conexion = GestorBD.conectar();
+        int sum = 0;
+        try {
+            Statement st = conexion.createStatement();
+            ResultSet res = st.executeQuery("SELECT SUM(salario) FROM Jugador WHERE Equipo_codEquipo=" + codEquipo + ";");
+
+            while (res.next()) {
+                int c = res.getInt(1);
+                sum = sum + c;
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        GestorBD.desconectar();
+        return sum;
+    }
 
     // JUGADORES DISPONIBLES (NO TIENEN EQUIPO NI DUEÑO NI NADA)
     public static List<Jugador> jugadoresDisponibles() {
